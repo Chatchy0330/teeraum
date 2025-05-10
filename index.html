@@ -51,7 +51,21 @@
   background: transparent;
   color: #ffffff;
   z-index: 5;
-  font-size: clamp(1rem, 25vh, 30rem);
+  font-size: clamp(1rem, 20vh, 30rem);
+      text-align: left;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      margin: 0 0 0 5vh;
+      /* 横中央に */
+      line-height: 1;
+}
+    #chapter1_text {
+  position: absolute;
+  top: 2300px;
+  left: 0;
+  background: transparent;
+  color: #ffffff;
+  z-index: 5;
+  font-size: clamp(1rem, 6vh, 20rem);
       text-align: left;
       font-family: Georgia, 'Times New Roman', Times, serif;
       margin: 0 0 0 6vh;
@@ -119,7 +133,7 @@
       left: 0;
       width: 100%;
       box-sizing: border-box;
-
+      color: #000000c9;
       /* ── レスポンシブなパディング ── */
       /* 左右：最小16px、理想は5vw、最大32px */
       padding-inline: clamp(10px, 10vw, 100px);
@@ -149,7 +163,6 @@
       width: 100%;
       /* コンテナ幅いっぱい */
       text-align: left;
-      color: #000000;
       font-weight: 600;
       font-family: Georgia, 'Times New Roman', Times, serif;
       font-size: 5em;
@@ -163,7 +176,6 @@
       width: 100%;
       /* コンテナ幅いっぱい */
       text-align: left;
-      color: #000000;
       font-weight: bold;
       font-family: Georgia, 'Times New Roman', Times, serif;
       font-size: 3.5em;
@@ -172,7 +184,6 @@
     }
 
     #message .text {
-      color: #000000cf;
       font-weight: normal;
       font-family: Georgia, 'Times New Roman', Times, serif;
       text-align: left;
@@ -241,6 +252,7 @@
   </section>
 
   <div id="chapter1">1.</div>
+  <div id="chapter1_text">Types of Tea</div>
 
   <!-- ② メッセージ -->
   <div id="message"></div>

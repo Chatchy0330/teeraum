@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Teeraum</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 20000px;
+      background: transparent;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      /* ← fixed から変更 */
+      top: 1750px;
+      left: 0;
+      width: 100%;
+      height: 20000px;
+      /* 十分に大きければOK */
+      background-color: #d7d7d7;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    #teeraum {
+  position: fixed;
+  top: 105px;
+  right: 1vw;
+  writing-mode:sideways-lr;
+  text-orientation:sideways;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: clamp(10rem, 25vw, 50rem);
+  color: #a0a0a07a;
+  z-index: -1;
+  line-height: 1.4;
+  opacity: 1;
+  letter-spacing: 0em;
+  pointer-events: none;
+}
+
+    #chapter1 {
+  position: absolute;
+  top: 1830px;
+  left: 0;
+  background: transparent;
+  color: #ffffff;
+  z-index: 5;
+  font-size: clamp(1rem, 25vh, 30rem);
+      text-align: left;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      margin: 0 0 0 6vh;
+      /* 横中央に */
+      line-height: 1;
+}
+    /* 目次 */
+    #toc {
+      background: transparent;
+      padding: 20px;
+      font-size: 5em;
+      line-height: 1.2;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: -2;
+      pointer-events: none;
+      /* 操作無効化（必要に応じて） */
+    }
+
+    #toc .toc-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #toc .toc-list li {
+      /* Flex を外してブロックに */
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    /* 番号を大きく・中央寄せ */
+    #toc .toc-number {
+      display: block;
+      font-size: clamp(1rem, 13vh, 20rem);
+      color: #a0a0a07a;
+      text-align: left;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      margin: 0 0 0 3vh;
+      /* 横中央に */
+      line-height: 0.9;
+
+    }
+
+    /* 章題は番号の下に来る */
+    #toc .toc-text {
+      display: block;
+      font-size: clamp(1rem, 3vh, 5rem);
+      color: #222;
+      line-height: 0.9;
+      text-align: left;
+      /* 必要に応じて中央揃え */
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      margin: 3vh 0 0 3.3vh;
+      /* 上マージンで番号と調整 */
+    }
+
+    /* メッセージ */
+    #message {
+
+      position: fixed;
+      top: 40px;
+      left: 0;
+      width: 100%;
+      box-sizing: border-box;
+
+      /* ── レスポンシブなパディング ── */
+      /* 左右：最小16px、理想は5vw、最大32px */
+      padding-inline: clamp(10px, 10vw, 100px);
+
+      background: transparent;
+
+      pointer-events: none;
+
+    }
+
+    /* スクロール量表示 */
+    #scrollValue {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+      z-index: 30;
+      pointer-events: none;
+    }
+
+    #message .name {
+      /* インライン→ブロックに */
+      width: 100%;
+      /* コンテナ幅いっぱい */
+      text-align: left;
+      color: #000000;
+      font-weight: 600;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 5em;
+      line-height: 160%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #message .namejp {
+      /* インライン→ブロックに */
+      width: 100%;
+      /* コンテナ幅いっぱい */
+      text-align: left;
+      color: #000000;
+      font-weight: bold;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 3.5em;
+      margin: 0;
+      padding: 0;
+    }
+
+    #message .text {
+      color: #000000cf;
+      font-weight: normal;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      text-align: left;
+      font-size: 2.7em;
+      line-height: 1.1;
+      margin-block-start: 0.2em;
+      /* 上側を 0.2em に */
+      margin-block-end: 5em;
+      /* 下側は不要なら 0 */
+      padding-inline-start: 0.8em;
+      /* リストの左インデントはお好みで */
+    }
+
+    /* リスト内の項目すべてに、下側マージンを入れる */
+    #message .text li {
+      margin-bottom: 0.6em;
+      line-height: 1.2em;
+    }
+
+    /* 扇コンテナ */
+    .fan-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      transform-origin: 40% 75%;
+      transform: translate(-35%, 22%) rotate(150deg);
+      z-index: 10;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .fan-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0.95;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="teeraum">Teeraum</div>
+
+  <!-- ── HTML：目次セクション ── -->
+  <section id="toc">
+    <ol class="toc-list">
+      
+      <li>
+        <span class="toc-number">1.</span>
+        <span class="toc-text">Types of Tea</span>
+      </li>
+      <li>
+        <span class="toc-number">2.</span>
+        <span class="toc-text">How to Make</span>
+      </li>
+      <li>
+        <span class="toc-number">3.</span>
+        <span class="toc-text">Health Benefits</span>
+      </li>
+      <li>
+        <span class="toc-number">4.</span>
+        <span class="toc-text">History</span>
+      </li>
+    </ol>
+  </section>
+
+  <div id="chapter1">1.</div>
+
+  <!-- ② メッセージ -->
+  <div id="message"></div>
+
+  <!-- ③ スクロール量表示 -->
+  <div id="scrollValue">0px</div>
+
+  <!-- ④ 扇アイコン -->
+  <div class="fan-container" id="fan">
+    <img src="img/ogi.png" alt="扇">
+  </div>
+
+  <script>
+    const toc = document.getElementById('toc');
+    const fan = document.getElementById('fan');
+    const message = document.getElementById('message');
+    const scrollValue = document.getElementById('scrollValue');
+
+    const initialTransform = 'translate(-35%, 22%) rotate(150deg)';
+
+    // メッセージ＆閾値(px)
+    const messages = [
+      "",
+      '<span class="name">KAMAIRICHA</span><br><span class="namejp"> 釜炒り茶</span><ul class="text"><li>lorem</li><li>ipsim</li><li></li><ul>',
+      '<span class="name">SENCHA</span><span class="namejp"> 煎茶</span><ul class="text"><li>Most common green tea in Japan.</li><li>Tea leaves are steamed after harvesting to prevent fermentation, resulting in the bright green colour. </li><li>Offers a delicate harmony of sweetness and astringency. </li><ul>',
+      '<span class="name">MATCHA</span><span class="namejp"> 抹茶</span><ul class="text"><li>Finely ground powder from high-quality, schade-grown green tea leaves.</li><li>Whisked with hot water, not brewed like other teas. </li><li>Whisked with hot water, not brewed like other teas. </li><ul>',
+      '<span class="name">HOJICHA</span><span class="namejp"> 焙じ茶</span><ul class="text"><li>Roasted green tea with a toasty aroma.</li><li>Low in caffeine, making it gentle on the stomach.</li><li>Budget-friendly and easy to prepare. </li><ul>',
+      '<span class="name">GENMAICHA</span><span class="namejp"> 玄米茶</span><ul class="text"><li>A blend of green tea and roasted brown rice.</li><li>Has a toasty and savory flavor with a mild astringency from the green tea base.</li><li>Also known as “popcorn tea” due to popped rice grains. </li><ul>',
+      '<span class="name">OOLONG TEA</span><span class="namejp"> 烏龍茶</span><ul class="text"><li> Semi-oxidized tea, halfway between green and black tea.</li><li>Moderate caffeine level and digestive benefits.</li><li>Common in Chinese and Taiwanese tea culture.</li><ul>',
+      '<span class="name">BLACK TEA</span><span class="namejp"> 紅茶</span><ul class="text"><li>Fully oxidized tea with a dark color and strong taste.</li><li>Higher caffeine content than green or oolong tea.</li><li>Also produced in Japan (called Wakocha), althogh not (yet) widely known. </li><ul>',
+
+      ""
+    ];
+    const messageThresholds = [0, 3000, 4564, 6102, 7500, 9100, 10500, 12000, 15293];
+
+    // 速度段階設定
+    const divisor = 5400;
+    const breakpoints = [3, 700, 900, 1000];
+    const speeds = [1.0, 0.7, 0.5, 0.2];
+    const invScales = speeds.map(s => s / divisor);
+
+    // 回転・スライド定数
+    const initialDeg = 150;
+    const maxRotation = 390;
+    const shiftThreshold = 0.6;
+    const oneMinusShiftThresh = 1 - shiftThreshold;
+    const maxShiftX = 300;
+    const maxShiftY = 200;
+
+    let latestScrollY = 0;
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      // 1) 最新の scrollY を取得
+      latestScrollY = window.scrollY;
+      // 2) 画面右上に表示
+      scrollValue.textContent = `${latestScrollY}px`;
+      // 3) アニメーション更新
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    function update() {
+      // 目次パララックス効果：スクロール量の 0.5 倍だけ下へ
+const tocParallaxOffset = latestScrollY * 0.5;
+toc.style.transform = `translateY(${tocParallaxOffset}px)`;
+ document.getElementById('teeraum').style.transform = `translateY(${tocParallaxOffset}px)`;
+      // 実スクロール量（TOC も含む）
+      const scrollOffset = latestScrollY;
+
+      // 3px 未満なら動かさない
+      if (scrollOffset < breakpoints[0]) {
+        fan.style.transform = initialTransform;
+        message.textContent = messages[0];
+        ticking = false;
+        return;
+      }
+
+      // メッセージ切り替え
+      let idx = 0;
+      for (let i = messageThresholds.length - 1; i >= 0; i--) {
+        if (scrollOffset >= messageThresholds[i]) {
+          idx = i; break;
+        }
+      }
+      message.innerHTML = messages[idx];
+
+      // 進捗を区間ごとに積算
+      let progress;
+      if (scrollOffset <= breakpoints[1]) {
+        progress = scrollOffset * invScales[0];
+      } else if (scrollOffset <= breakpoints[2]) {
+        const base = breakpoints[1] * invScales[0];
+        progress = base + (scrollOffset - breakpoints[1]) * invScales[1];
+      } else if (scrollOffset <= breakpoints[3]) {
+        const base = breakpoints[1] * invScales[0]
+          + (breakpoints[2] - breakpoints[1]) * invScales[1];
+        progress = base + (scrollOffset - breakpoints[2]) * invScales[2];
+      } else {
+        const base = breakpoints[1] * invScales[0]
+          + (breakpoints[2] - breakpoints[1]) * invScales[1]
+          + (breakpoints[3] - breakpoints[2]) * invScales[2];
+        progress = base + (scrollOffset - breakpoints[3]) * invScales[3];
+      }
+      if (progress > 1) progress = 1;
+
+      // 回転角度
+      const rotateDeg = progress * maxRotation;
+
+      // 左下スライド
+      let shiftX = 0, shiftY = 0;
+      if (progress > shiftThreshold) {
+        const t2 = (progress - shiftThreshold) / oneMinusShiftThresh;
+        shiftX = t2 * maxShiftX;
+        shiftY = t2 * maxShiftY;
+      }
+
+      // 適用
+      fan.style.transform =
+        `translate(-35%, 22%) ` +
+        `translateX(${-shiftX}px) ` +
+        `translateY(${shiftY}px) ` +
+        `rotate(${initialDeg - rotateDeg}deg)`;
+
+      ticking = false;
+    }
+
+    // サイズ調整（必要時のみ）
+    function adjustFanSize() {
+      const vw = window.innerWidth, vh = window.innerHeight;
+      const baseSize = Math.max(vw * 1.1, vh * 1.1);
+      fan.style.width = `${baseSize}px`;
+      fan.style.height = 'auto';
+    }
+    adjustFanSize();
+    let lastWidth = window.innerWidth;
+    window.addEventListener('orientationchange', () => {
+      adjustFanSize();
+      lastWidth = window.innerWidth;
+    });
+    window.addEventListener('resize', () => {
+      const w = window.innerWidth;
+      if (w !== lastWidth) {
+        adjustFanSize();
+        lastWidth = w;
+      }
+    });
+  </script>
+
+</body>
+
+</html>

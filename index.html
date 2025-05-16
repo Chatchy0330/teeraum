@@ -9,7 +9,7 @@
     body {
       margin: 0;
       padding: 0;
-      height: 20000px;
+      height: 16000px;
       background: transparent;
       overflow-x: hidden;
     }
@@ -20,7 +20,8 @@
       top: 1750px;
       left: 0;
       width: 100%;
-      height: 13750px; /* 15500 - 1750 */
+      height: 13750px;
+      /* 15500 - 1750 */
       background-color: #d7d7d7;
       z-index: 0;
       pointer-events: none;
@@ -170,7 +171,7 @@
 
     /* メッセージ */
     #message {
-
+      z-index: 2;
       position: fixed;
       top: 40px;
       left: 0;
@@ -253,7 +254,7 @@
       left: 0;
       transform-origin: 40% 75%;
       transform: translate(-35%, 22%) rotate(150deg);
-      z-index: 2;
+      z-index: 1;
       pointer-events: none;
       will-change: transform;
     }
@@ -264,6 +265,178 @@
       display: block;
       opacity: 0.95;
     }
+
+    #brew-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+      margin: 8vh auto;
+      width: 90%;
+      max-width: 800px;
+    }
+
+    #brew-steps .step img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    #brew-steps .step p {
+      font-size: 1.4rem;
+      line-height: 1.6;
+    }
+
+    #brew-methods {
+      padding-left: 5vw;
+      overflow-x: auto;
+    }
+
+    .scroll-wrapper {
+  padding-right: 5vw; /* ← 追加 */
+  scroll-padding-left: 5vw; /* ← スナップ時の位置合わせ */
+      display: flex;
+      gap: 3vw;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      touch-action: pan-x;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .brew-card {
+      flex: 0 0 85vw;
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 0 10px #ccc;
+      scroll-snap-align: start;
+      box-sizing: border-box;
+  scroll-snap-align: start;
+}
+
+/* カード内全体にも message と同じ書式を適用 */
+.brew-card * {
+  font-weight: normal;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: left;
+font-size: 1em;
+  line-height: 1.3;
+  padding-inline-start: 0.8em;
+}
+
+.brew-card h2 {
+  font-size: 3.5em;
+  font-weight: 600;
+  padding-inline-start: 0;
+  margin: 0 0 0.5em 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.brew-card .tea span {
+  font-size: 1em;
+  text-align: center;
+  padding: 0;
+}
+
+.brew-card img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 1rem;
+  object-fit: contain;
+}
+
+    .brew-card.hot {
+      border: 3px solid #d67a6b;
+    }
+
+    .brew-card.warm {
+      border: 3px solid #d6b46b;
+    }
+
+    .brew-card.second {
+      border: 3px solid #6bb4d6;
+    }
+
+    .brew-title {
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .brew-title img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .brew-desc {
+      margin-top: 1rem;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .brew-desc,
+#brew-steps .step p {
+  font-weight: normal;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: left;
+  font-size: 2em;
+  line-height: 1.1;
+  margin-block-start: 0.2em;
+  margin-block-end: 5em;
+  padding-inline-start: 0.8em;
+}
+
+    .brew-info {
+      margin-top: 1.5rem;
+      font-size: 4em;
+    }
+
+    .brew-info .item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .brew-info img {
+  max-width: 5vw;
+  height: auto;
+  min-width: 40px;
+  max-height: 80px;
+  transition: transform 0.3s ease;
+}
+
+    .ideal-for {
+      margin-top: 1.5rem;
+    }
+
+    .tea-pairing {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .tea img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .tea span {
+      display: block;
+      text-align: center;
+      font-size: 0.85rem;
+      margin-top: 0.4rem;
+    }
+    #chapter2_content {
+  position: absolute;
+  top: 16100px;
+  left: 0;
+  width: 100%;
+  z-index: 5;
+}
   </style>
 </head>
 
@@ -311,6 +484,92 @@
   <div id="chapter2">2.</div>
   <div id="chapter2_text">How to Brew</div>
 
+  <!-- Chapter 2: Brewing Steps -->
+   <div id="chapter2_content">
+  <section id="brew-steps">
+    <div class="step">
+      <img src="img/step1.png" alt="Step 1">
+      <p>茶葉を急須に入れます。適量は約2g。良質な茶葉を使用すると風味がより引き立ちます。</p>
+    </div>
+    <div class="step">
+      <img src="img/step2.png" alt="Step 2">
+      <p>適温のお湯を準備します。温度は茶の種類によって異なります（下のセクション参照）。</p>
+    </div>
+    <div class="step">
+      <img src="img/step3.png" alt="Step 3">
+      <p>急須にお湯を注ぎ、一定時間待ちます。抽出時間も種類ごとに異なります。</p>
+    </div>
+    <div class="step">
+      <img src="img/step4.png" alt="Step 4">
+      <p>湯呑みに注いで完成。香りと味わいをゆっくり楽しんでください。</p>
+    </div>
+  </section>
+
+  <!-- Chapter 2: Brew Types -->
+  <section id="brew-methods">
+    <div class="scroll-wrapper">
+
+      <!-- Warm Brew -->
+      <div class="brew-card warm">
+        <h2 class="brew-title"><img src="img/icon-temp-warm.png"> Warm Brew</h2>
+        <p class="brew-desc">Warm brew is gentle and brings out umami. Recommended for delicate green teas.</p>
+        <div class="brew-info">
+          <div class="item"><img src="img/icon-temp-warm.png"><span>60 - 70℃</span></div>
+          <div class="item"><img src="img/icon-beaker-warm.png"><span>5g of tea leaves in 200 mL of water</span></div>
+          <div class="item"><img src="img/icon-timer-warm.png"><span>60 - 90s</span></div>
+        </div>
+        <div class="ideal-for">
+          <p>Ideal for:</p>
+          <div class="tea-pairing">
+            <div class="tea"><img src="img/gyokuro.png"><span>GYOKURO</span></div>
+            <div class="tea"><img src="img/sencha.png"><span>SENCHA</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hot Brew -->
+      <div class="brew-card hot">
+        <h2 class="brew-title"><img src="img/icon-temp-hot.png"> Hot Brew</h2>
+        <p class="brew-desc">A quick, strong brew with boiling water. More bitterness and less umami. Good for aromatic
+          teas.</p>
+        <div class="brew-info">
+          <div class="item"><img src="img/icon-temp-hot.png"><span>90 - 100℃</span></div>
+          <div class="item"><img src="img/icon-beaker-hot.png"><span>5g of tea leaves in 200 mL of water</span></div>
+          <div class="item"><img src="img/icon-timer-hot.png"><span>20 - 30s</span></div>
+        </div>
+        <div class="ideal-for">
+          <p>Ideal for:</p>
+          <div class="tea-pairing">
+            <div class="tea"><img src="img/hojicha.png"><span>HOJICHA</span></div>
+            <div class="tea"><img src="img/genmaicha.png"><span>GENMAICHA</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Brew -->
+      <div class="brew-card second">
+        <h2 class="brew-title"><img src="img/icon-temp-second.png"> Second Brew</h2>
+        <p class="brew-desc">Second brew uses already steeped leaves, requiring shorter brew time. Adjust temperature
+          slightly higher.</p>
+        <div class="brew-info">
+          <div class="item"><img src="img/icon-temp-second.png"><span>70 - 80℃</span></div>
+          <div class="item"><img src="img/icon-beaker-second.png"><span>5g of used tea leaves in 200 mL of water</span>
+          </div>
+          <div class="item"><img src="img/icon-timer-second.png"><span>10 - 20s</span></div>
+        </div>
+        <div class="ideal-for">
+          <p>Ideal for:</p>
+          <div class="tea-pairing">
+            <div class="tea"><img src="img/sencha.png"><span>SENCHA</span></div>
+            <div class="tea"><img src="img/gyokuro.png"><span>GYOKURO</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  </div>
+
   <script>
     const toc = document.getElementById('toc');
     const fan = document.getElementById('fan');
@@ -321,16 +580,15 @@
 
     // メッセージ＆閾値(px)
     const messages = [
-      "",
-      '<span class="name">KAMAIRICHA</span><br><span class="namejp"> 釜炒り茶</span><ul class="text"><li>lorem</li><li>ipsim</li><li></li><ul>',
-      '<span class="name">SENCHA</span><span class="namejp"> 煎茶</span><ul class="text"><li>Most common green tea in Japan.</li><li>Tea leaves are steamed after harvesting to prevent fermentation, resulting in the bright green colour. </li><li>Offers a delicate harmony of sweetness and astringency. </li><ul>',
-      '<span class="name">MATCHA</span><span class="namejp"> 抹茶</span><ul class="text"><li>Finely ground powder from high-quality, schade-grown green tea leaves.</li><li>Whisked with hot water, not brewed like other teas. </li><li>Whisked with hot water, not brewed like other teas. </li><ul>',
-      '<span class="name">HOJICHA</span><span class="namejp"> 焙じ茶</span><ul class="text"><li>Roasted green tea with a toasty aroma.</li><li>Low in caffeine, making it gentle on the stomach.</li><li>Budget-friendly and easy to prepare. </li><ul>',
-      '<span class="name">GENMAICHA</span><span class="namejp"> 玄米茶</span><ul class="text"><li>A blend of green tea and roasted brown rice.</li><li>Has a toasty and savory flavor with a mild astringency from the green tea base.</li><li>Also known as “popcorn tea” due to popped rice grains. </li><ul>',
-      '<span class="name">OOLONG TEA</span><span class="namejp"> 烏龍茶</span><ul class="text"><li> Semi-oxidized tea, halfway between green and black tea.</li><li>Moderate caffeine level and digestive benefits.</li><li>Common in Chinese and Taiwanese tea culture.</li><ul>',
-      '<span class="name">BLACK TEA</span><span class="namejp"> 紅茶</span><ul class="text"><li>Fully oxidized tea with a dark color and strong taste.</li><li>Higher caffeine content than green or oolong tea.</li><li>Also produced in Japan (called Wakocha), althogh not (yet) widely known. </li><ul>',
-
-      ""
+      "", // 初期表示用（空）
+      '<span class="name">KAMAIRICHA</span><br><span class="namejp"> 釜炒り茶</span><ul class="text"><li>lorem</li><li>ipsim</li></ul>',
+      '<span class="name">SENCHA</span><span class="namejp"> 煎茶</span><ul class="text"><li>Most common green tea in Japan.</li><li>Tea leaves are steamed after harvesting to prevent fermentation, resulting in the bright green colour. </li><li>Offers a delicate harmony of sweetness and astringency. </li></ul>',
+      '<span class="name">MATCHA</span><span class="namejp"> 抹茶</span><ul class="text"><li>Finely ground powder from high-quality, schade-grown green tea leaves.</li><li>Whisked with hot water, not brewed like other teas. </li><li>Whisked with hot water, not brewed like other teas. </li></ul>',
+      '<span class="name">HOJICHA</span><span class="namejp"> 焙じ茶</span><ul class="text"><li>Roasted green tea with a toasty aroma.</li><li>Low in caffeine, making it gentle on the stomach.</li><li>Budget-friendly and easy to prepare. </li></ul>',
+      '<span class="name">GENMAICHA</span><span class="namejp"> 玄米茶</span><ul class="text"><li>A blend of green tea and roasted brown rice.</li><li>Has a toasty and savory flavor with a mild astringency from the green tea base.</li><li>Also known as “popcorn tea” due to popped rice grains. </li></ul>',
+      '<span class="name">OOLONG TEA</span><span class="namejp"> 烏龍茶</span><ul class="text"><li> Semi-oxidized tea, halfway between green and black tea.</li><li>Moderate caffeine level and digestive benefits.</li><li>Common in Chinese and Taiwanese tea culture.</li></ul>',
+      '<span class="name">BLACK TEA</span><span class="namejp"> 紅茶</span><ul class="text"><li>Fully oxidized tea with a dark color and strong taste.</li><li>Higher caffeine content than green or oolong tea.</li><li>Also produced in Japan (called Wakocha), althogh not (yet) widely known. </li></ul>',
+      "" // 終端用（空）
     ];
     const messageThresholds = [0, 3000, 4564, 6102, 7500, 9100, 10500, 12000, 15293];
 
@@ -405,7 +663,7 @@
           + (breakpoints[3] - breakpoints[2]) * invScales[2];
         progress = base + (scrollOffset - breakpoints[3]) * invScales[3];
       }
-      if (progress > 1) progress = 1;
+      progress = Math.min(Math.max(progress, 0), 1);
 
       // 回転角度
       const rotateDeg = progress * maxRotation;

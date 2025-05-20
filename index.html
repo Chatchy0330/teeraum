@@ -5,320 +5,292 @@
   <meta charset="UTF-8">
   <title>Teeraum</title>
   <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      height: 16000px;
-      background: transparent;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: absolute;
-      top: 1750px;
-      left: 0;
-      width: 100%;
-      height: 13750px;
-      /* 15500 - 1750 */
-      background-color: #d7d7d7;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    body::after {
-      content: "";
-      position: absolute;
-      top: 15500px;
-      left: 0;
-      width: 100%;
-      height: 10000px;
-      background-color: #94967a;
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    #teeraum {
-      position: fixed;
-      top: 105px;
-      right: 1vw;
-      writing-mode: sideways-lr;
-      text-orientation: sideways;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      font-size: clamp(10rem, 25vw, 50rem);
-      color: #a0a0a07a;
-      z-index: -1;
-      line-height: 1.4;
-      opacity: 1;
-      letter-spacing: 0em;
-      pointer-events: none;
-    }
-
-    #chapter1 {
-      position: absolute;
-      top: 1830px;
-      left: 0;
-      background: transparent;
-      color: #ffffff;
-      z-index: 1;
-      font-size: clamp(1rem, 20vh, 30rem);
-      text-align: left;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      margin: 0 0 0 5vh;
-      /* 横中央に */
-      line-height: 1;
-    }
-
-    #chapter1_text {
-      position: absolute;
-      top: 2300px;
-      left: 0;
-      background: transparent;
-      color: #ffffff;
-      z-index: 1;
-      font-size: clamp(1rem, 6vh, 20rem);
-      text-align: left;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      margin: 0 0 0 6vh;
-      /* 横中央に */
-      line-height: 1;
-    }
-
-    #chapter2 {
-      position: absolute;
-      top: 15580px;
-      left: 0;
-      background: transparent;
-      color: #ffffff;
-      z-index: 4;
-      font-size: clamp(1rem, 20vh, 30rem);
-      text-align: left;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      margin: 0 0 0 5vh;
-      /* 横中央に */
-      line-height: 1;
-    }
-
-    #chapter2_text {
-      position: absolute;
-      top: 16050px;
-      left: 0;
-      background: transparent;
-      color: #ffffff;
-      z-index: 4;
-      font-size: clamp(1rem, 6vh, 20rem);
-      text-align: left;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      margin: 0 0 0 6vh;
-      /* 横中央に */
-      line-height: 1;
-    }
-
-
-    /* 目次 */
-    #toc {
-      background: transparent;
-      padding: 20px;
-      font-size: 5em;
-      line-height: 1.2;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: -2;
-      pointer-events: none;
-      /* 操作無効化（必要に応じて） */
-    }
-
-    #toc .toc-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    #toc .toc-list li {
-      /* Flex を外してブロックに */
-      display: block;
-      margin-bottom: 1rem;
-    }
-
-    /* 番号を大きく・中央寄せ */
-    #toc .toc-number {
-      display: block;
-      font-size: clamp(1rem, 13vh, 20rem);
-      color: #a0a0a07a;
-      text-align: left;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      margin: 0 0 0 3vh;
-      /* 横中央に */
-      line-height: 0.9;
-
-    }
-
-    /* 章題は番号の下に来る */
-    #toc .toc-text {
-      display: block;
-      font-size: clamp(1rem, 3vh, 5rem);
-      color: #222;
-      line-height: 0.9;
-      text-align: left;
-      /* 必要に応じて中央揃え */
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      margin: 3vh 0 0 3.3vh;
-      /* 上マージンで番号と調整 */
-    }
-
-    /* メッセージ */
-    #message {
-      z-index: 2;
-      position: fixed;
-      top: 40px;
-      left: 0;
-      width: 100%;
-      box-sizing: border-box;
-      color: #000000c9;
-      /* ── レスポンシブなパディング ── */
-      /* 左右：最小16px、理想は5vw、最大32px */
-      padding-inline: clamp(10px, 10vw, 100px);
-
-      background: transparent;
-
-      pointer-events: none;
-
-    }
-
-    /* スクロール量表示 */
-    #scrollValue {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 14px;
-      z-index: 30;
-      pointer-events: none;
-    }
-
-    #message .name {
-      /* インライン→ブロックに */
-      width: 100%;
-      /* コンテナ幅いっぱい */
-      text-align: left;
-      font-weight: 600;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      font-size: 5em;
-      line-height: 160%;
-      margin: 0;
-      padding: 0;
-    }
-
-    #message .namejp {
-      /* インライン→ブロックに */
-      width: 100%;
-      /* コンテナ幅いっぱい */
-      text-align: left;
-      font-weight: bold;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      font-size: 3.5em;
-      margin: 0;
-      padding: 0;
-    }
-
-    #message .text {
-      font-weight: normal;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      text-align: left;
-      font-size: 2.7em;
-      line-height: 1.1;
-      margin-block-start: 0.2em;
-      /* 上側を 0.2em に */
-      margin-block-end: 5em;
-      /* 下側は不要なら 0 */
-      padding-inline-start: 0.8em;
-      /* リストの左インデントはお好みで */
-    }
-
-    /* リスト内の項目すべてに、下側マージンを入れる */
-    #message .text li {
-      margin-bottom: 0.6em;
-      line-height: 1.2em;
-    }
-
-    /* 扇コンテナ */
-    .fan-container {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      transform-origin: 40% 75%;
-      transform: translate(-35%, 22%) rotate(150deg);
-      z-index: 1;
-      pointer-events: none;
-      will-change: transform;
-    }
-
-    .fan-container img {
-      width: 100%;
-      height: auto;
-      display: block;
-      opacity: 0.95;
-    }
-
-    #brew-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 4rem;
-      margin: 8vh auto;
-      width: 90%;
-      max-width: 800px;
-    }
-
-    #brew-steps .step img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-    }
-
-    #brew-steps .step p {
-      font-size: 1.4rem;
-      line-height: 1.6;
-    }
-
-    #brew-methods {
-      padding-left: 5vw;
-      overflow-x: auto;
-    }
-
-    .scroll-wrapper {
-  padding-right: 5vw; /* ← 追加 */
-  scroll-padding-left: 5vw; /* ← スナップ時の位置合わせ */
-      display: flex;
-      gap: 3vw;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      touch-action: pan-x;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .brew-card {
-      flex: 0 0 85vw;
-      background: #fff;
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: 0 0 10px #ccc;
-      scroll-snap-align: start;
-      box-sizing: border-box;
-  scroll-snap-align: start;
+  /* ========================================= */
+/* 基本リセットと背景色                    */
+/* ========================================= */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 16000px;
+  background: transparent;
+  overflow-x: hidden;
 }
 
-/* カード内全体にも message と同じ書式を適用 */
+body::before {
+  content: "";
+  position: absolute;
+  top: 1750px;
+  left: 0;
+  width: 100%;
+  height: 13750px;
+  background-color: #d7d7d7;
+  z-index: 0;
+  pointer-events: none;
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  top: 15500px;
+  left: 0;
+  width: 100%;
+  height: 10000px;
+  background-color: #94967a;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* タイトルロゴ（右縦） */
+#teeraum {
+  position: fixed;
+  top: 105px;
+  right: 1vw;
+  writing-mode: sideways-lr;
+  text-orientation: sideways;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: clamp(10rem, 25vw, 50rem);
+  color: #a0a0a07a;
+  z-index: -1;
+  line-height: 1.4;
+  opacity: 1;
+  letter-spacing: 0em;
+  pointer-events: none;
+}
+
+/* 章番号とテキスト */
+#chapter1, #chapter2 {
+  position: absolute;
+  left: 0;
+  background: transparent;
+  color: #ffffff;
+  font-size: clamp(1rem, 20vh, 30rem);
+  text-align: left;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-left: 5vh;
+  line-height: 1;
+}
+
+#chapter1 { top: 1830px; z-index: 1; }
+#chapter2 { top: 15580px; z-index: 4; }
+
+#chapter1_text, #chapter2_text {
+  position: absolute;
+  left: 0;
+  background: transparent;
+  color: #ffffff;
+  font-size: clamp(1rem, 6vh, 20rem);
+  text-align: left;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-left: 6vh;
+  line-height: 1;
+}
+
+#chapter1_text { top: 2300px; z-index: 1; }
+#chapter2_text { top: 16050px; z-index: 4; }
+
+#chapter2_content {
+  position: absolute;
+  top: 16100px;
+  left: 0;
+  width: 100%;
+  z-index: 5;
+}
+
+/* ========================================= */
+/* 目次セクション                            */
+/* ========================================= */
+#toc {
+  background: transparent;
+  padding: 20px;
+  font-size: 5em;
+  line-height: 1.2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -2;
+  pointer-events: none;
+}
+
+#toc .toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#toc .toc-list li {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+#toc .toc-number {
+  display: block;
+  font-size: clamp(1rem, 13vh, 20rem);
+  color: #a0a0a07a;
+  text-align: left;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-left: 3vh;
+  line-height: 0.9;
+}
+
+#toc .toc-text {
+  display: block;
+  font-size: clamp(1rem, 3vh, 5rem);
+  color: #222;
+  text-align: left;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin: 3vh 0 0 3.3vh;
+  line-height: 0.9;
+}
+
+/* ========================================= */
+/* スクロールに応じたメッセージ切替         */
+/* ========================================= */
+#message {
+  z-index: 2;
+  position: fixed;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  color: #000000c9;
+  padding-inline: clamp(10px, 10vw, 100px);
+  background: transparent;
+  pointer-events: none;
+}
+
+#message .name {
+  width: 100%;
+  text-align: left;
+  font-weight: 600;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 5em;
+  line-height: 160%;
+  margin: 0;
+  padding: 0;
+}
+
+#message .namejp {
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 3.5em;
+  margin: 0;
+  padding: 0;
+}
+
+#message .text {
+  font-weight: normal;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: left;
+  font-size: 2.7em;
+  line-height: 1.1;
+  margin-block-start: 0.2em;
+  margin-block-end: 5em;
+  padding-inline-start: 0.8em;
+}
+
+#message .text li {
+  margin-bottom: 0.6em;
+  line-height: 1.2em;
+}
+
+/* ========================================= */
+/* 扇アイコン                                */
+/* ========================================= */
+.fan-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  transform-origin: 40% 75%;
+  transform: translate(-35%, 22%) rotate(150deg);
+  z-index: 1;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.fan-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.95;
+}
+
+/* ========================================= */
+/* Chapter 2 - 抽出ステップ (How to Brew)   */
+/* ========================================= */
+#brew-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  margin: 8vh auto;
+  width: 90%;
+  max-width: 800px;
+}
+
+#brew-steps .step img {
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+}
+
+#brew-steps .step p {
+  font-size: 4em; 
+  font-weight: normal;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: left;
+  line-height: 1.1;
+  margin-block-start: 0.2em;
+  margin-block-end: 5em;
+  padding-inline-start: 0.8em;
+}
+
+.step p .tip {
+  display: block;
+  font-size: 3rem; /* 通常より大きく */
+  color: #3b3b3b;
+  margin-top: 0.4em;
+  line-height: 1.3;
+}
+
+/* ========================================= */
+/* Brew Methods Card Layout                 */
+/* ========================================= */
+#brew-methods {
+  padding-left: 5vw;
+  overflow-x: auto;
+}
+
+.scroll-wrapper {
+  padding-right: 5vw;
+  scroll-padding-left: 5vw;
+  display: flex;
+  gap: 3vw;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
+  pointer-events: auto;
+}
+
+.brew-card {
+  flex: 0 0 85vw;
+  background: #fff;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 0 10px #ccc;
+  scroll-snap-align: start;
+  box-sizing: border-box;
+}
+
 .brew-card * {
   font-weight: normal;
   font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: left;
-font-size: 1em;
+  font-size: 1em;
   line-height: 1.3;
   padding-inline-start: 0.8em;
 }
@@ -347,60 +319,41 @@ font-size: 1em;
   object-fit: contain;
 }
 
-    .brew-card.hot {
-      border: 3px solid #d67a6b;
-    }
+.brew-card.hot    { border: 3px solid #d67a6b; }
+.brew-card.warm   { border: 3px solid #d6b46b; }
+.brew-card.second { border: 3px solid #6bb4d6; }
 
-    .brew-card.warm {
-      border: 3px solid #d6b46b;
-    }
-
-    .brew-card.second {
-      border: 3px solid #6bb4d6;
-    }
-
-    .brew-title {
-      font-size: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-    }
-
-    .brew-title img {
-      width: 28px;
-      height: 28px;
-    }
-
-    .brew-desc {
-      margin-top: 1rem;
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-    .brew-desc,
-#brew-steps .step p {
-  font-weight: normal;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  text-align: left;
-  font-size: 2em;
-  line-height: 1.1;
-  margin-block-start: 0.2em;
-  margin-block-end: 5em;
-  padding-inline-start: 0.8em;
+.brew-title {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
 }
 
-    .brew-info {
-      margin-top: 1.5rem;
-      font-size: 4em;
-    }
+.brew-title img {
+  width: 28px;
+  height: 28px;
+}
 
-    .brew-info .item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
+.brew-desc {
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
 
-    .brew-info img {
+.brew-info {
+  margin-top: 1.5rem;
+  font-size: 4em;
+}
+
+.brew-info .item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.brew-info img {
   max-width: 5vw;
   height: auto;
   min-width: 40px;
@@ -408,35 +361,79 @@ font-size: 1em;
   transition: transform 0.3s ease;
 }
 
-    .ideal-for {
-      margin-top: 1.5rem;
-    }
+.ideal-for {
+  margin-top: 1.5rem;
+}
 
-    .tea-pairing {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 0.5rem;
-    }
+.tea-pairing {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
 
-    .tea img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-    }
+.tea img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
 
-    .tea span {
-      display: block;
-      text-align: center;
-      font-size: 0.85rem;
-      margin-top: 0.4rem;
-    }
-    #chapter2_content {
+.tea span {
+  display: block;
+  text-align: center;
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+}
+
+#chapter3, #chapter3_text {
   position: absolute;
-  top: 16100px;
+  left: 0;
+  color: #ffffff;
+  font-size: clamp(1rem, 20vh, 30rem);
+  margin-left: 5vh;
+  line-height: 1;
+}
+#chapter3 { top: 25000px; z-index: 5; }
+#chapter3_text { top: 25400; font-size: clamp(1rem, 6vh, 20rem); margin-left: 6vh; z-index: 5; }
+
+#chapter3_content {
+  position: absolute;
+  top: 25800px;
   left: 0;
   width: 100%;
   z-index: 5;
+  padding: 5vh 10vw 20vh;
+  box-sizing: border-box;
 }
+
+#history-events .event {
+  margin-bottom: 40vh;
+  font-size: 2.2rem;
+  color: #222;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#timeline-readout {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 33vh;
+  background: #e0e0e0;
+  color: #000;
+  font-size: 4rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#timeline-readout {
+  display: none;
+}
+
   </style>
 </head>
 
@@ -488,21 +485,34 @@ font-size: 1em;
    <div id="chapter2_content">
   <section id="brew-steps">
     <div class="step">
-      <img src="img/step1.png" alt="Step 1">
-      <p>茶葉を急須に入れます。適量は約2g。良質な茶葉を使用すると風味がより引き立ちます。</p>
-    </div>
-    <div class="step">
-      <img src="img/step2.png" alt="Step 2">
-      <p>適温のお湯を準備します。温度は茶の種類によって異なります（下のセクション参照）。</p>
-    </div>
-    <div class="step">
-      <img src="img/step3.png" alt="Step 3">
-      <p>急須にお湯を注ぎ、一定時間待ちます。抽出時間も種類ごとに異なります。</p>
-    </div>
-    <div class="step">
-      <img src="img/step4.png" alt="Step 4">
-      <p>湯呑みに注いで完成。香りと味わいをゆっくり楽しんでください。</p>
-    </div>
+  <img src="img/step1.png" alt="Step 1">
+  <p>
+    Cook water to the desired tempature.
+    <span class="tip">The water temperature drops by approximately 10℃ when poured into a non-prewarmed cup or Kyusu. For example, to achieve 80°C water in your Kyusu, first pour boiling water into cups, then transfer it to the Kyusu. </span>
+  </p>
+</div>
+<div class="step">
+  <img src="img/step2.png" alt="Step 2">
+  <p>
+    Add tea leaves into a Kyusu (or teapod), and then pour in hot water. 
+    <span class="tip">See right for the recommended amount.
+In general, soft water works better for Japanese teas. You can find it at supermarkets. </span>
+  </p>
+</div>
+<div class="step">
+  <img src="img/step3.png" alt="Step 3">
+  <p>Wait for the specified time.
+    <span class="tip">See right for the recommended brewing time. 
+You can either close the lid or leave it open to enjoy the dance of the tea leaves.</span>
+  </p>
+</div>
+<div class="step">
+  <img src="img/step4.png" alt="Step 4">
+  <p>
+    Pour tea into (pre-heated) cups. 
+    <span class="tip">Pour a small amount into the first cup, then the second, then the third. Next, pour in reverse order — third, second, first — and repeat. This method is called ‘Mawashitsugi’</span>
+  </p>
+</div>
   </section>
 
   <!-- Chapter 2: Brew Types -->
@@ -569,6 +579,33 @@ font-size: 1em;
     </div>
   </section>
   </div>
+  <div id="chapter3">3.</div>
+<div id="chapter3_text">History of Japanese Tea</div>
+<div id="chapter3_content">
+  <section id="history-events">
+    <div class="event" data-year="804">
+      <h2>804年：最澄が茶を持ち帰る</h2>
+      <p>唐から茶の種と喫茶の習慣を日本へ。</p>
+    </div>
+    <div class="event" data-year="1191">
+      <h2>1191年：栄西『喫茶養生記』を著す</h2>
+      <p>茶の効能を紹介し、武士層に広まる契機に。</p>
+    </div>
+    <div class="event" data-year="1577">
+      <h2>1577年：千利休 茶道を大成</h2>
+      <p>わび茶の精神が確立され、茶の湯文化が深まる。</p>
+    </div>
+    <div class="event" data-year="1738">
+      <h2>1738年：永谷宗円が煎茶製法を確立</h2>
+      <p>現代日本茶の原型が誕生。</p>
+    </div>
+    <div class="event" data-year="2020">
+      <h2>2020年：日本茶カフェ文化の広がり</h2>
+      <p>抹茶やボトリングティーが世界で人気に。</p>
+    </div>
+  </section>
+  <div id="timeline-readout">年号表示領域</div>
+</div>
 
   <script>
     const toc = document.getElementById('toc');
@@ -706,6 +743,53 @@ font-size: 1em;
         lastWidth = w;
       }
     });
+
+    // Chapter 3 - IntersectionObserver for year tracking
+
+    // --- 年号表示を Chapter 3 のみ表示する ---
+const timelineReadout = document.getElementById('timeline-readout');
+const chapter3Content = document.getElementById('chapter3_content');
+
+function toggleTimelineReadout() {
+  const rect = chapter3Content.getBoundingClientRect();
+  const inView = rect.top < window.innerHeight && rect.bottom > 0;
+  timelineReadout.style.display = inView ? 'flex' : 'none';
+}
+window.addEventListener('scroll', toggleTimelineReadout);
+const yearReadout = document.getElementById('timeline-readout');
+const historyEvents = document.querySelectorAll('#history-events .event');
+
+const yearObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const year = entry.target.dataset.year;
+      yearReadout.textContent = `${year} 年`;
+    }
+  });
+}, {
+  root: null,
+  rootMargin: '-33% 0px -66% 0px',
+  threshold: 0.0
+});
+
+historyEvents.forEach(event => yearObserver.observe(event));
+
+// Chapter 3 の表示位置を Chapter 2 の直後に配置する
+function positionChapter3() {
+  const chapter2 = document.getElementById('chapter2_content');
+  const chapter3 = document.getElementById('chapter3');
+  const chapter3Text = document.getElementById('chapter3_text');
+  const chapter3Content = document.getElementById('chapter3_content');
+
+  const bottom2 = chapter2.offsetTop + chapter2.offsetHeight;
+
+  chapter3.style.top = `${bottom2 + 200}px`;
+  chapter3Text.style.top = `${bottom2 + 600}px`;
+  chapter3Content.style.top = `${bottom2 + 1000}px`;
+}
+
+window.addEventListener('load', positionChapter3);
+window.addEventListener('resize', positionChapter3);
   </script>
 
 </body>

@@ -393,7 +393,7 @@ body::after {
   line-height: 1;
 }
 #chapter3 { top: 25000px; z-index: 5; }
-#chapter3_text { top: 25400; font-size: clamp(1rem, 6vh, 20rem); margin-left: 6vh; z-index: 5; }
+#chapter3_text { top: 25400px; font-size: clamp(1rem, 6vh, 20rem); margin-left: 6vh; z-index: 5; }
 
 #chapter3_content {
   position: absolute;
@@ -415,23 +415,36 @@ body::after {
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-#timeline-readout {
+
+#timeline-image-wrapper {
+  width: 100%;
+  overflow: hidden;
+  display: none;
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: 33vh;
-  background: #e0e0e0;
-  color: #000;
-  font-size: 4rem;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: #fff;
+  z-index: 6;
 }
-#timeline-readout {
+#timeline-marker {
+  position: fixed;
+  bottom: 500px; /* 画像の上に重ねるように調整（必要に応じて調整） */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 30px solid black;
+  z-index: 7;
   display: none;
+}
+
+#timeline-image {
+  width: 2300px; /* 表示サイズ = 実サイズ3000px の半分 */
+  height: auto;
+  display: block;
+  transition: transform 0.6s ease;
 }
 
   </style>
@@ -604,7 +617,10 @@ You can either close the lid or leave it open to enjoy the dance of the tea leav
       <p>抹茶やボトリングティーが世界で人気に。</p>
     </div>
   </section>
-  <div id="timeline-readout">年号表示領域</div>
+  <div id="timeline-marker"></div>
+  <div id="timeline-image-wrapper">
+  <img id="timeline-image" src="img/timeline.png" alt="Timeline">
+</div>
 </div>
 
   <script>
@@ -747,32 +763,14 @@ You can either close the lid or leave it open to enjoy the dance of the tea leav
     // Chapter 3 - IntersectionObserver for year tracking
 
     // --- 年号表示を Chapter 3 のみ表示する ---
-const timelineReadout = document.getElementById('timeline-readout');
 const chapter3Content = document.getElementById('chapter3_content');
 
-function toggleTimelineReadout() {
-  const rect = chapter3Content.getBoundingClientRect();
-  const inView = rect.top < window.innerHeight && rect.bottom > 0;
-  timelineReadout.style.display = inView ? 'flex' : 'none';
-}
-window.addEventListener('scroll', toggleTimelineReadout);
-const yearReadout = document.getElementById('timeline-readout');
+
+window.addEventListener('scroll', toggleTimelineVisibility);
 const historyEvents = document.querySelectorAll('#history-events .event');
 
-const yearObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const year = entry.target.dataset.year;
-      yearReadout.textContent = `${year} 年`;
-    }
-  });
-}, {
-  root: null,
-  rootMargin: '-33% 0px -66% 0px',
-  threshold: 0.0
-});
 
-historyEvents.forEach(event => yearObserver.observe(event));
+
 
 // Chapter 3 の表示位置を Chapter 2 の直後に配置する
 function positionChapter3() {
@@ -790,6 +788,54 @@ function positionChapter3() {
 
 window.addEventListener('load', positionChapter3);
 window.addEventListener('resize', positionChapter3);
+
+
+// === Chapter 3 タイムライン画像処理 ===
+const timelineWrapper = document.getElementById('timeline-image-wrapper');
+const timelineImage = document.getElementById('timeline-image');
+
+
+window.addEventListener('load', toggleTimelineVisibility);
+// Chapter 3 が見えているかどうかで画像表示切替
+function toggleTimelineVisibility() {
+  const rect = chapter3Content.getBoundingClientRect();
+  const inView = rect.top < window.innerHeight && rect.bottom > 0;
+  timelineWrapper.style.display = inView ? 'block' : 'none';
+    document.getElementById('timeline-marker').style.display = inView ? 'block' : 'none';
+}
+window.addEventListener('scroll', toggleTimelineVisibility);
+
+// 800年 = 500px, 2000年 = 2500px → 1700年ぶんで2000px
+const yearToX = year => {
+  const pxPerYear = 2000 / (2000 - 800); // 約1.6667px/年
+  return 500 + (year - 800) * pxPerYear;
+};
+
+// 年号に対応する位置を中央にスライド
+function centerTimelineOn(year) {
+  const x = yearToX(parseInt(year));
+  const containerWidth = timelineWrapper.offsetWidth;
+  const imgDisplayWidth = timelineImage.offsetWidth;
+  const maxOffset = imgDisplayWidth - containerWidth;
+  const targetX = x - containerWidth / 2;
+  const offsetX = Math.max(0, Math.min(targetX, maxOffset));
+  timelineImage.style.transform = `translateX(${-offsetX}px)`;
+}
+
+// IntersectionObserver（更新）
+const updatedYearObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const year = entry.target.dataset.year;
+      centerTimelineOn(year);
+    }
+  });
+}, {
+  root: null,
+  rootMargin: '-33% 0px -66% 0px',
+  threshold: 0.0
+});
+historyEvents.forEach(event => updatedYearObserver.observe(event));
   </script>
 
 </body>

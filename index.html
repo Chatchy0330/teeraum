@@ -5,448 +5,566 @@
   <meta charset="UTF-8">
   <title>Teeraum</title>
   <style>
-  /* ========================================= */
-/* 基本リセットと背景色                    */
-/* ========================================= */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 16000px;
-  background: transparent;
-  overflow-x: hidden;
-}
+    /* ========================================= */
+    /* 基本リセットと背景色                    */
+    /* ========================================= */
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 16000px;
+      background: transparent;
+      overflow-x: hidden;
+    }
 
-body::before {
-  content: "";
-  position: absolute;
-  top: 1750px;
-  left: 0;
-  width: 100%;
-  height: 13750px;
-  background-color: #d7d7d7;
-  z-index: 0;
-  pointer-events: none;
-}
+    body::before {
+      content: "";
+      position: absolute;
+      top: 1750px;
+      left: 0;
+      width: 100%;
+      height: 13750px;
+      background-color: #d7d7d7;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-body::after {
-  content: "";
-  position: absolute;
-  top: 15500px;
-  left: 0;
-  width: 100%;
-  height: 10000px;
-  background-color: #94967a;
-  z-index: 3;
-  pointer-events: none;
-}
+    body::after {
+      content: "";
+      position: absolute;
+      top: 15500px;
+      left: 0;
+      width: 100%;
+      height: 8400px;
+      background-color: #94967a;
+      z-index: 3;
+      pointer-events: none;
+    }
 
-/* タイトルロゴ（右縦） */
-#teeraum {
-  position: fixed;
-  top: 105px;
-  right: 1vw;
-  writing-mode: sideways-lr;
-  text-orientation: sideways;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: clamp(10rem, 25vw, 50rem);
-  color: #a0a0a07a;
-  z-index: -1;
-  line-height: 1.4;
-  opacity: 1;
-  letter-spacing: 0em;
-  pointer-events: none;
-}
+    /* タイトルロゴ（右縦） */
+    #teeraum {
+      position: fixed;
+      top: 105px;
+      right: 1vw;
+      writing-mode: sideways-lr;
+      text-orientation: sideways;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: clamp(10rem, 25vw, 50rem);
+      color: #a0a0a07a;
+      z-index: -1;
+      line-height: 1.4;
+      opacity: 1;
+      letter-spacing: 0em;
+      pointer-events: none;
+    }
 
-/* 章番号とテキスト */
-#chapter1, #chapter2 {
-  position: absolute;
-  left: 0;
-  background: transparent;
-  color: #ffffff;
-  font-size: clamp(1rem, 20vh, 30rem);
-  text-align: left;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  margin-left: 5vh;
-  line-height: 1;
-}
+    /* 章番号とテキスト */
+    #chapter1,
+    #chapter2 {
+      position: absolute;
+      left: 0;
+      background: transparent;
+      color: #ffffff;
+      font-size: clamp(1rem, 20vh, 30rem);
+      text-align: left;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      margin-left: 5vh;
+      line-height: 1;
+    }
 
-#chapter1 { top: 1830px; z-index: 1; }
-#chapter2 { top: 15580px; z-index: 4; }
 
-#chapter1_text, #chapter2_text {
-  position: absolute;
-  left: 0;
-  background: transparent;
-  color: #ffffff;
-  font-size: clamp(1rem, 6vh, 20rem);
-  text-align: left;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  margin-left: 6vh;
-  line-height: 1;
-}
 
-#chapter1_text { top: 2300px; z-index: 1; }
-#chapter2_text { top: 16050px; z-index: 4; }
 
-#chapter2_content {
-  position: absolute;
-  top: 16100px;
-  left: 0;
-  width: 100%;
-  z-index: 5;
-}
+    #chapter1 {
+      top: 1830px;
+      z-index: 1;
+    }
 
-/* ========================================= */
-/* 目次セクション                            */
-/* ========================================= */
-#toc {
-  background: transparent;
-  padding: 20px;
-  font-size: 5em;
-  line-height: 1.2;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: -2;
-  pointer-events: none;
-}
+    #chapter2 {
+      top: 15580px;
+      z-index: 4;
+      color: #f8f4e7;
+    }
 
-#toc .toc-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+    #chapter1_text,
+    #chapter2_text {
+      position: absolute;
+      left: 0;
+      background: transparent;
+      color: #ffffff;
+      font-size: clamp(1rem, 6vh, 20rem);
+      text-align: left;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      margin-left: 6vh;
+      line-height: 1;
+    }
 
-#toc .toc-list li {
-  display: block;
-  margin-bottom: 1rem;
-}
+    #chapter1_text {
+      top: 2300px;
+      z-index: 1;
+    }
 
-#toc .toc-number {
-  display: block;
-  font-size: clamp(1rem, 13vh, 20rem);
-  color: #a0a0a07a;
-  text-align: left;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  margin-left: 3vh;
-  line-height: 0.9;
-}
+    #chapter2_text {
+      top: 16000px;
+      z-index: 4;
+      color: #f8f4e7;
+    }
 
-#toc .toc-text {
-  display: block;
-  font-size: clamp(1rem, 3vh, 5rem);
-  color: #222;
-  text-align: left;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  margin: 3vh 0 0 3.3vh;
-  line-height: 0.9;
-}
+    #chapter2_content {
+      position: absolute;
+      top: 16100px;
+      left: 0;
+      width: 100%;
+      z-index: 5;
+    }
 
-/* ========================================= */
-/* スクロールに応じたメッセージ切替         */
-/* ========================================= */
-#message {
-  z-index: 2;
-  position: fixed;
-  top: 40px;
-  left: 0;
-  width: 100%;
-  box-sizing: border-box;
-  color: #000000c9;
-  padding-inline: clamp(10px, 10vw, 100px);
-  background: transparent;
-  pointer-events: none;
-}
+    /* ========================================= */
+    /* 目次セクション                            */
+    /* ========================================= */
+    #toc {
+      background: transparent;
+      padding: 20px;
+      font-size: 5em;
+      line-height: 1.2;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: -2;
+      pointer-events: none;
+    }
 
-#message .name {
-  width: 100%;
-  text-align: left;
-  font-weight: 600;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 5em;
-  line-height: 160%;
-  margin: 0;
-  padding: 0;
-}
+    #toc .toc-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
 
-#message .namejp {
-  width: 100%;
-  text-align: left;
-  font-weight: bold;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 3.5em;
-  margin: 0;
-  padding: 0;
-}
+    #toc .toc-list li {
+      display: block;
+      margin-bottom: 1rem;
+    }
 
-#message .text {
-  font-weight: normal;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  text-align: left;
-  font-size: 2.7em;
-  line-height: 1.1;
-  margin-block-start: 0.2em;
-  margin-block-end: 5em;
-  padding-inline-start: 0.8em;
-}
+    #toc .toc-number {
+      display: block;
+      font-size: clamp(1rem, 13vh, 20rem);
+      color: #a0a0a07a;
+      text-align: left;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      margin-left: 3vh;
+      line-height: 0.9;
+    }
 
-#message .text li {
-  margin-bottom: 0.6em;
-  line-height: 1.2em;
-}
+    #toc .toc-text {
+      display: block;
+      font-size: clamp(1rem, 3vh, 5rem);
+      color: #222;
+      text-align: left;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      margin: 3vh 0 0 3.3vh;
+      line-height: 0.9;
+    }
 
-/* ========================================= */
-/* 扇アイコン                                */
-/* ========================================= */
-.fan-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  transform-origin: 40% 75%;
-  transform: translate(-35%, 22%) rotate(150deg);
-  z-index: 1;
-  pointer-events: none;
-  will-change: transform;
-}
+    /* ========================================= */
+    /* スクロールに応じたメッセージ切替         */
+    /* ========================================= */
+    #message {
+      z-index: 2;
+      position: fixed;
+      top: 40px;
+      left: 0;
+      width: 100%;
+      box-sizing: border-box;
+      color: #000000c9;
+      padding-inline: clamp(10px, 10vw, 100px);
+      background: transparent;
+      pointer-events: none;
+    }
 
-.fan-container img {
-  width: 100%;
-  height: auto;
-  display: block;
-  opacity: 0.95;
-}
+    #message .name {
+      width: 100%;
+      text-align: left;
+      font-weight: 600;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 5em;
+      line-height: 160%;
+      margin: 0;
+      padding: 0;
+    }
 
-/* ========================================= */
-/* Chapter 2 - 抽出ステップ (How to Brew)   */
-/* ========================================= */
-#brew-steps {
+    #message .namejp {
+      width: 100%;
+      text-align: left;
+      font-weight: bold;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 3.5em;
+      margin: 0;
+      padding: 0;
+    }
+
+    #message .text {
+      font-weight: normal;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      text-align: left;
+      font-size: 2.7em;
+      line-height: 1.1;
+      margin-block-start: 0.2em;
+      margin-block-end: 5em;
+      padding-inline-start: 0.8em;
+    }
+
+    #message .text li {
+      margin-bottom: 0.6em;
+      line-height: 1.2em;
+    }
+
+    /* ========================================= */
+    /* 扇アイコン                                */
+    /* ========================================= */
+    .fan-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      transform-origin: 40% 75%;
+      transform: translate(-35%, 22%) rotate(150deg);
+      z-index: 1;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .fan-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0.95;
+    }
+
+    /* ========================================= */
+    /* Chapter 2 - 抽出ステップ (How to Brew)   */
+    /* ========================================= */
+    #brew-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin: 5vh auto 8vh auto;
+      width: 90%;
+      max-width: 800px;
+    }
+
+    #brew-steps .step img {
+      width: 100%;
+      height: auto;
+      border-radius: 3px;
+      margin-bottom: 0rem;
+    }
+
+    #brew-steps .step p {
+      font-size: 4em;
+      font-weight: normal;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      text-align: left;
+      line-height: 1.1;
+      margin-block-start: 0.2em;
+      margin-block-end: 2em;
+      padding-inline-start: 0.8em;
+    }
+
+    .step p .tip {
+      display: block;
+      font-size: 3rem;
+      /* 通常より大きく */
+      color: #3b3b3b;
+      margin-top: 0.4em;
+      line-height: 1.3;
+    }
+
+    /* ========================================= */
+    /* Brew Methods Card Layout                 */
+    /* ========================================= */
+    #brew-methods {
+      padding-left: 5vw;
+      overflow-x: auto;
+    }
+
+    .scroll-wrapper {
+      padding-right: 5vw;
+      scroll-padding-left: 5vw;
+      display: flex;
+      gap: 3vw;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      touch-action: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      overscroll-behavior-y: auto;
+      pointer-events: auto;
+    }
+
+    .brew-card {
+      flex: 0 0 85vw;
+      background: #f8f4e7;
+      border-radius: 40px;
+      padding: 2rem;
+      box-shadow: 10px #00000037;
+      scroll-snap-align: start;
+      box-sizing: border-box;
+            margin-top: 10vh; /* ← これを追加。5vh〜15vhくらいで調整してみてください */
+    }
+
+    .brew-card * {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      text-align: left;
+      font-size: 1em;
+      line-height: 1.3;
+      padding-inline-start: 0.8em;
+
+    }
+
+    .brew-card h2 {
+      font-size: 5em;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      /* 👈 ここを追加 */
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0.5em 0 1em 0;
+      padding-inline-start: 0;
+      justify-content: flex-start;
+    }
+
+    .brew-card .tea span {
+      font-size: 1em;
+      text-align: center;
+      padding: 0;
+    }
+
+    .brew-card img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 1rem;
+      object-fit: contain;
+    }
+
+    .brew-card.hot {
+      border: 10px solid #d67a6b;
+    }
+
+    .brew-card.warm {
+      border: 10px solid #d6b46b;
+    }
+
+    .brew-card.second {
+      border: 10px solid #838c7b;
+    }
+
+    .brew-card.cold {
+      border: 10px solid #7085b8;
+    }
+
+    .brew-card.ice {
+      border: 10px solid #214a72;
+    }
+
+
+    .brew-title {
+      font-size: 5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .brew-title img {
+      transform: translateY(0.16em);
+      margin-right: 4rem;
+      margin-left: 1.5rem;
+    }
+
+    .brew-desc {
+      margin-top: 1rem;
+      font-size: 2.5rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      padding-left: 5rem;
+      /* 👈 左余白追加 */
+      padding-right: 2rem;
+      /* 👈 右余白追加 */
+    }
+
+
+
+    .brew-info {
+      margin-top: 1.5rem;
+      font-size: 4em;
+      font-weight: 200;
+    }
+
+    .brew-info .item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      margin-left: 0;
+      padding-left: 0;
+    }
+
+    .brew-info .item span {
+      font-weight: 200 !important;
+    }
+
+    .brew-info img {
+      max-width: auto;
+      max-height: 15vh;
+
+      transition: transform 0.3s ease;
+      margin-left: 0;
+      padding-left: 2rem;
+    }
+
+    .ideal-for {
+      margin-top: 1.5rem;
+    }
+
+    .tea-pairing {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .tea img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .tea span {
+      display: block;
+      text-align: center;
+      font-size: 0.85rem;
+      margin-top: 0.4rem;
+    }
+
+    .step-marker {
+      width: 0;
+      height: 0;
+      border-left: 60px solid transparent;
+      border-right: 60px solid transparent;
+      border-top: 60px solid transparent;
+      border-bottom: 60px solid rgba(0, 0, 0, 0.248);
+      /* 枠線のみのため塗りつぶしは避けます */
+      position: relative;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) rotate(180deg);
+      margin: 2rem 0;
+      box-sizing: border-box;
+      background: transparent;
+    }
+
+
+    #chapter3,
+    #chapter3_text {
+      position: absolute;
+      left: 0;
+      color: #000000;
+      font-size: clamp(1rem, 20vh, 30rem);
+      margin-left: 5vh;
+      line-height: 1;
+    }
+
+    #chapter3 {
+      top: 26000px;
+      z-index: 5;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    #chapter3_text {
+      top: 2500px;
+      font-size: clamp(1rem, 6vh, 20rem);
+      margin-left: 6vh;
+      z-index: 5;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    #chapter3_content {
+      position: absolute;
+      top: 25800px;
+      left: 0;
+      width: 100%;
+      z-index: 5;
+      padding: 5vh 10vw 20vh;
+      box-sizing: border-box;
+    }
+
+    #history-events .event {
+  margin-bottom: 15vh; /* ← イベント間を狭く */
   display: flex;
   flex-direction: column;
-  gap: 4rem;
-  margin: 8vh auto;
-  width: 90%;
-  max-width: 800px;
+  align-items: flex-start;
+  gap: 2rem; /* 要素間のスペースを整える */
 }
 
-#brew-steps .step img {
+  #history-events .event img {
   width: 100%;
   height: auto;
-  border-radius: 3px;
-}
-
-#brew-steps .step p {
-  font-size: 4em; 
-  font-weight: normal;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  text-align: left;
-  line-height: 1.1;
-  margin-block-start: 0.2em;
-  margin-block-end: 5em;
-  padding-inline-start: 0.8em;
-}
-
-.step p .tip {
-  display: block;
-  font-size: 3rem; /* 通常より大きく */
-  color: #3b3b3b;
-  margin-top: 0.4em;
-  line-height: 1.3;
-}
-
-/* ========================================= */
-/* Brew Methods Card Layout                 */
-/* ========================================= */
-#brew-methods {
-  padding-left: 5vw;
-  overflow-x: auto;
-}
-
-.scroll-wrapper {
-  padding-right: 5vw;
-  scroll-padding-left: 5vw;
-  display: flex;
-  gap: 3vw;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  touch-action: auto; /* ← ここ！縦スクロール有効化 */
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
-  overscroll-behavior-y: auto;
-  pointer-events: auto;
-}
-
-.brew-card {
-  flex: 0 0 85vw;
-  background: #fff;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 0 10px #ccc;
-  scroll-snap-align: start;
-  box-sizing: border-box;
-}
-
-.brew-card * {
-  font-weight: normal;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  text-align: left;
-  font-size: 1em;
-  line-height: 1.3;
-  padding-inline-start: 0.8em;
-}
-
-.brew-card h2 {
-  font-size: 3.5em;
-  font-weight: 600;
-  padding-inline-start: 0;
-  margin: 0 0 0.5em 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-}
-
-.brew-card .tea span {
-  font-size: 1em;
-  text-align: center;
-  padding: 0;
-}
-
-.brew-card img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin-bottom: 1rem;
+  border-radius: 6px;
+  max-height: 50vh; /* ← ビューポート高さの最大50%に制限 */
   object-fit: contain;
 }
 
-.brew-card.hot    { border: 3px solid #d67a6b; }
-.brew-card.warm   { border: 3px solid #d6b46b; }
-.brew-card.second { border: 3px solid #6bb4d6; }
-
-.brew-title {
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
+#history-events .event h2 {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
 }
 
-.brew-title img {
-  width: 28px;
-  height: 28px;
+#history-events .event .event-year {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
-.brew-desc {
-  margin-top: 1rem;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-.brew-info {
-  margin-top: 1.5rem;
-  font-size: 4em;
-}
-
-.brew-info .item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.brew-info img {
-  max-width: 5vw;
-  height: auto;
-  min-width: 40px;
-  max-height: 80px;
-  transition: transform 0.3s ease;
-}
-
-.ideal-for {
-  margin-top: 1.5rem;
-}
-
-.tea-pairing {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 0.5rem;
-}
-
-.tea img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
-.tea span {
-  display: block;
-  text-align: center;
-  font-size: 0.85rem;
-  margin-top: 0.4rem;
-}
-
-#chapter3, #chapter3_text {
-  position: absolute;
-  left: 0;
-  color: #ffffff;
-  font-size: clamp(1rem, 20vh, 30rem);
-  margin-left: 5vh;
-  line-height: 1;
-}
-#chapter3 { top: 25000px; z-index: 5; }
-#chapter3_text { top: 25400px; font-size: clamp(1rem, 6vh, 20rem); margin-left: 6vh; z-index: 5; }
-
-#chapter3_content {
-  position: absolute;
-  top: 25800px;
-  left: 0;
-  width: 100%;
-  z-index: 5;
-  padding: 5vh 10vw 20vh;
-  box-sizing: border-box;
-}
-
-#history-events .event {
-  margin-bottom: 40vh;
-  font-size: 2.2rem;
-  color: #222;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+#history-events .event p:not(.event-year) {
+  font-size: 2.7rem;
+  line-height: 1.6;
 }
 
 
-#timeline-image-wrapper {
-  width: 100%;
-  overflow: hidden;
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  background-color: #fff;
-  z-index: 6;
-}
-#timeline-marker {
-  position: fixed;
-  bottom: 500px; /* 画像の上に重ねるように調整（必要に応じて調整） */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 30px solid black;
-  z-index: 7;
-  display: none;
-}
+    #timeline-image-wrapper {
+      width: 100%;
+      overflow: hidden;
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      background-color: transparent;
+      z-index: 6;
+
+    }
+
+    #timeline-marker {
+      position: fixed;
+      bottom: 450px;
+      /* 画像の上に重ねるように調整（必要に応じて調整） */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 30px solid black;
+      z-index: 7;
+      display: none;
+    }
 
 #timeline-image {
-  width: 3000px; /* 表示サイズ = 実サイズ3000px の23/30 */
-  height: auto;
+  width: auto;
+  height: 480px;
   display: block;
-  transition: transform 0.6s ease;
+  transition: transform 1s ease;
+  transform: translateX(100%); /* 初期状態は画面右に待機 */
 }
-
   </style>
 </head>
 
@@ -468,11 +586,11 @@ body::after {
       </li>
       <li>
         <span class="toc-number">3.</span>
-        <span class="toc-text">Health Benefits</span>
+        <span class="toc-text">History</span>
       </li>
       <li>
         <span class="toc-number">4.</span>
-        <span class="toc-text">History of Japanese Tea</span>
+        <span class="toc-text">Health Benefits</span>
       </li>
     </ol>
   </section>
@@ -494,221 +612,283 @@ body::after {
   <div id="chapter2">2.</div>
   <div id="chapter2_text">How to Brew</div>
 
+
+    
   <!-- Chapter 2: Brewing Steps -->
-   <div id="chapter2_content">
-  <section id="brew-steps">
-    <div class="step">
-  <img src="img/step1.png" alt="Step 1">
-  <p>
-    Cook water to the desired tempature.
-    <span class="tip">The water temperature drops by approximately 10℃ when poured into a non-prewarmed cup or Kyusu. For example, to achieve 80°C water in your Kyusu, first pour boiling water into cups, then transfer it to the Kyusu. </span>
-  </p>
-</div>
-<div class="step">
-  <img src="img/step2.png" alt="Step 2">
-  <p>
-    Add tea leaves into a Kyusu (or teapod), and then pour in hot water. 
-    <span class="tip">See right for the recommended amount.
-In general, soft water works better for Japanese teas. You can find it at supermarkets. </span>
-  </p>
-</div>
-<div class="step">
-  <img src="img/step3.png" alt="Step 3">
-  <p>Wait for the specified time.
-    <span class="tip">See right for the recommended brewing time. 
-You can either close the lid or leave it open to enjoy the dance of the tea leaves.</span>
-  </p>
-</div>
-<div class="step">
-  <img src="img/step4.png" alt="Step 4">
-  <p>
-    Pour tea into (pre-heated) cups. 
-    <span class="tip">Pour a small amount into the first cup, then the second, then the third. Next, pour in reverse order — third, second, first — and repeat. This method is called ‘Mawashitsugi’</span>
-  </p>
-</div>
-  </section>
+  <div id="chapter2_content">
+          <!-- Chapter 2: Brew Types -->
+    <section id="brew-methods">
+      <div class="scroll-wrapper">
 
-  <!-- Chapter 2: Brew Types -->
-  <section id="brew-methods">
-    <div class="scroll-wrapper">
-
-      <!-- Warm Brew -->
-      <div class="brew-card warm">
-        <h2 class="brew-title"><img src="img/icon-temp-warm.png"> Warm Brew</h2>
-        <p class="brew-desc">Warm brew is gentle and brings out umami. Recommended for delicate green teas.</p>
-        <div class="brew-info">
-          <div class="item"><img src="img/icon-temp-warm.png"><span>60 - 70℃</span></div>
-          <div class="item"><img src="img/icon-beaker-warm.png"><span>5g of tea leaves in 200 mL of water</span></div>
-          <div class="item"><img src="img/icon-timer-warm.png"><span>60 - 90s</span></div>
+        <!-- Warm Brew -->
+        <div class="brew-card warm">
+          <h2 class="brew-title"><img src="img/icon-warm.png"> Warm Brew</h2>
+          <p class="brew-desc">Warm brew gently brings out umami. Recommended for delicate green teas.</p>
+          <div class="brew-info">
+            <div class="item"><img src="img/icon-temp-warm.png"><span>60 - 70℃</span></div>
+            <div class="item"><img src="img/icon-beaker-warm.png"><span>5g of tea leaves in 200 mL of water</span></div>
+            <div class="item"><img src="img/icon-timer-warm.png"><span>60 - 90s</span></div>
+          </div>
+          <div class="ideal-for">
+            <p>Ideal for:</p>
+            <div class="tea-pairing">
+              <div class="tea"><img src="img/gyokuro.png"><span>GYOKURO</span></div>
+              <div class="tea"><img src="img/sencha.png"><span>SENCHA</span></div>
+            </div>
+          </div>
         </div>
-        <div class="ideal-for">
-          <p>Ideal for:</p>
-          <div class="tea-pairing">
-            <div class="tea"><img src="img/gyokuro.png"><span>GYOKURO</span></div>
-            <div class="tea"><img src="img/sencha.png"><span>SENCHA</span></div>
+
+        <!-- Hot Brew -->
+        <div class="brew-card hot">
+          <h2 class="brew-title"><img src="img/icon-hot.png"> Hot Brew</h2>
+          <p class="brew-desc">A quick, strong brew with boiling water. More bitterness and less umami. Good for
+            aromatic
+            teas.</p>
+          <div class="brew-info">
+            <div class="item"><img src="img/icon-temp-hot.png"><span>90 - 100℃</span></div>
+            <div class="item"><img src="img/icon-beaker-hot.png"><span>5g of tea leaves in 200 mL of water</span></div>
+            <div class="item"><img src="img/icon-timer-hot.png"><span>20 - 30s</span></div>
+          </div>
+          <div class="ideal-for">
+            <p>Ideal for:</p>
+            <div class="tea-pairing">
+              <div class="tea"><img src="img/hojicha.png"><span>HOJICHA</span></div>
+              <div class="tea"><img src="img/genmaicha.png"><span>GENMAICHA</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second Brew -->
+        <div class="brew-card second">
+          <h2 class="brew-title"><img src="img/icon-second.png"> Second Brew</h2>
+          <p class="brew-desc">Second brew uses already steeped leaves, requiring shorter brew time. Adjust temperature
+            slightly higher.</p>
+          <div class="brew-info">
+            <div class="item"><img src="img/icon-temp-second.png"><span>A Little Higher</span></div>
+            <div class="item"><img src="img/icon-timer-second.png"><span>A Little Shorter</span></div>
+          </div>
+          <div class="ideal-for">
+            <p>Ideal for:</p>
+            <div class="tea-pairing">
+              <div class="tea"><img src="img/sencha.png"><span>SENCHA</span></div>
+              <div class="tea"><img src="img/gyokuro.png"><span>GYOKURO</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cold Brew -->
+        <div class="brew-card cold">
+          <h2 class="brew-title"><img src="img/icon-cold.png"> Cold Brew</h2>
+          <p class="brew-desc">Cold brew extracts sweetness and umami over time, resulting in a smooth and refreshing
+            tea.</p>
+          <div class="brew-info">
+            <div class="item"><img src="img/icon-temp-cold.png"><span>Room Temp or Cold Water</span></div>
+            <div class="item"><img src="img/icon-beaker-cold.png"><span>5 - 10g of tea leaves in 1L of water</span></div>
+            <div class="item"><img src="img/icon-timer-cold.png"><span>1 - 2 hrs</span></div>
+          </div>
+          <div class="ideal-for">
+            <p>Ideal for:</p>
+            <div class="tea-pairing">
+              <div class="tea"><img src="img/genmaicha.png"><span>GENMAICHA</span></div>
+              <div class="tea"><img src="img/sencha.png"><span>SENCHA</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- Ice Brew -->
+        <div class="brew-card ice">
+          <h2 class="brew-title"><img src="img/icon-ice.png"> Ice Brew</h2>
+          <p class="brew-desc">Ice brew uses melting ice to extract deep umami. Time-consuming but creates a unique
+            experience.</p>
+          <div class="brew-info">
+            <div class="item"><img src="img/icon-temp-ice.png"><span>Melting Ice</span></div>
+            <div class="item"><img src="img/icon-beaker-ice.png"><span>1g of tea leaves on 50mL of ice</span></div>
+            <div class="item"><img src="img/icon-timer-ice.png"><span>1-2 hrs</span></div>
+          </div>
+          <div class="ideal-for">
+            <p>Ideal for:</p>
+            <div class="tea-pairing">
+              <div class="tea"><img src="img/gyokuro.png"><span>GYOKURO</span></div>
+              <div class="tea"><img src="img/matcha.png"><span>MATCHA</span></div>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- Hot Brew -->
-      <div class="brew-card hot">
-        <h2 class="brew-title"><img src="img/icon-temp-hot.png"> Hot Brew</h2>
-        <p class="brew-desc">A quick, strong brew with boiling water. More bitterness and less umami. Good for aromatic
-          teas.</p>
-        <div class="brew-info">
-          <div class="item"><img src="img/icon-temp-hot.png"><span>90 - 100℃</span></div>
-          <div class="item"><img src="img/icon-beaker-hot.png"><span>5g of tea leaves in 200 mL of water</span></div>
-          <div class="item"><img src="img/icon-timer-hot.png"><span>20 - 30s</span></div>
-        </div>
-        <div class="ideal-for">
-          <p>Ideal for:</p>
-          <div class="tea-pairing">
-            <div class="tea"><img src="img/hojicha.png"><span>HOJICHA</span></div>
-            <div class="tea"><img src="img/genmaicha.png"><span>GENMAICHA</span></div>
-          </div>
-        </div>
+    </section>
+    <section id="brew-steps">
+      <div class="step">
+        <img src="img/step1.png" alt="Step 1">
+        <p>
+          Cook water to the desired tempature.
+          <span class="tip">The water temperature drops by approximately 10℃ when poured into a non-prewarmed cup or
+            Kyusu. For example, to achieve 80°C water in your Kyusu, first pour boiling water into cups, then transfer
+            it to the Kyusu. </span>
+        </p>
       </div>
-
-      <!-- Second Brew -->
-      <div class="brew-card second">
-        <h2 class="brew-title"><img src="img/icon-temp-second.png"> Second Brew</h2>
-        <p class="brew-desc">Second brew uses already steeped leaves, requiring shorter brew time. Adjust temperature
-          slightly higher.</p>
-        <div class="brew-info">
-          <div class="item"><img src="img/icon-temp-second.png"><span>70 - 80℃</span></div>
-          <div class="item"><img src="img/icon-beaker-second.png"><span>5g of used tea leaves in 200 mL of water</span>
-          </div>
-          <div class="item"><img src="img/icon-timer-second.png"><span>10 - 20s</span></div>
-        </div>
-        <div class="ideal-for">
-          <p>Ideal for:</p>
-          <div class="tea-pairing">
-            <div class="tea"><img src="img/sencha.png"><span>SENCHA</span></div>
-            <div class="tea"><img src="img/gyokuro.png"><span>GYOKURO</span></div>
-          </div>
-        </div>
+      <div class="step-marker"></div>
+      <div class="step">
+        <img src="img/step2.png" alt="Step 2">
+        <p>
+          Add tea leaves into a Kyusu (or teapod), and then pour in hot water.
+          <span class="tip">See right for the recommended amount.
+            In general, soft water works better for Japanese teas. You can find it at supermarkets. </span>
+        </p>
       </div>
+      <div class="step-marker"></div>
+      <div class="step">
+        <img src="img/step3.png" alt="Step 3">
+        <p>Wait for the specified time.
+          <span class="tip">See right for the recommended brewing time.
+            You can either close the lid or leave it open to enjoy the dance of the tea leaves.</span>
+        </p>
+      </div>
+      <div class="step-marker"></div>
+      <div class="step">
+        <img src="img/step4.png" alt="Step 4">
+        <p>
+          Pour tea into (pre-heated) cups.
+          <span class="tip">Pour a small amount into the first cup, then the second, then the third. Next, pour in
+            reverse order — third, second, first — and repeat. This method is called ‘Mawashitsugi’</span>
+        </p>
+      </div>
+    </section>
 
-    </div>
-  </section>
+
   </div>
   <div id="chapter3">3.</div>
-<div id="chapter3_text">History of Japanese Tea</div>
-<div id="chapter3_content">
-  <section id="history-events">
+  <div id="chapter3_text">History of Japanese Tea</div>
+  <div id="chapter3_content">
+    <section id="history-events">
   <div class="event" data-year="760">
-  <h2>Chinese Cha Jing</h2>
-  <p class="event-year">c. 760 AD</p>
-  <p>Tang-dynasty scholar Lu Yu writes the Chajing (Classic of Tea) ￼. As the first comprehensive tea manual, it codifies cultivation and brewing methods, deeply influencing East Asian tea culture and later Japanese tea scholarship.</p>
-</div>
+    <img src="img/event-760.png" alt="Event image">
+    <h2>Chinese Cha Jing</h2>
+    <p class="event-year">c. 760 AD</p>
+    <p>Tang-dynasty scholar Lu Yu writes the Chajing (Classic of Tea). As the first comprehensive tea manual, it codifies cultivation and brewing methods, deeply influencing East Asian tea culture and later Japanese tea scholarship.</p>
+  </div>
 
-<div class="event" data-year="805">
-  <h2>Tea arrives with Saichō and Kūkai</h2>
-  <p class="event-year">c. 805 AD</p>
-  <p>Heian-period monks Saichō (767–822) and Kūkai (774–835) return from Tang China with tea plants and seeds ￼. They distribute the plants at the imperial court in Kyoto, making tea drinking fashionable among nobles and initiating cultivation in Japan ￼.</p>
-</div>
+  <div class="event" data-year="805">
+    <img src="img/event-805.png" alt="Event image">
+    <h2>Tea arrives with Saichō and Kūkai</h2>
+    <p class="event-year">c. 805 AD</p>
+    <p>Heian-period monks Saichō (767–822) and Kūkai (774–835) return from Tang China with tea plants and seeds. They distribute the plants at the imperial court in Kyoto, making tea drinking fashionable among nobles and initiating cultivation in Japan.</p>
+  </div>
 
-<div class="event" data-year="815">
-  <h2>Emperor Saga and Eichū</h2>
-  <p class="event-year">815 AD</p>
-  <p>Buddhist monk Eichū serves tea to Emperor Saga in 815 ￼. Impressed, Saga orders the planting of tea gardens (including imperial palace grounds) ￼. This imperial endorsement kick-starts official tea cultivation and courtly tea ritual in Japan.</p>
-</div>
+  <div class="event" data-year="815">
+    <img src="img/event-815.jpg" alt="Event image">
+    <h2>Emperor Saga and Eichū</h2>
+    <p class="event-year">815 AD</p>
+    <p>Buddhist monk Eichū serves tea to Emperor Saga in 815. Impressed, Saga orders the planting of tea gardens (including imperial palace grounds). This imperial endorsement kick-starts official tea cultivation and courtly tea ritual in Japan.</p>
+  </div>
 
-<div class="event" data-year="1191">
-  <h2>Eisai brings tea seeds</h2>
-  <p class="event-year">1191 AD</p>
-  <p>Zen monk Eisai returns from Song China with tea seeds and cultivates them in Kyushu and at Kōzan-ji temple in Kyoto (Tagano-o) ￼. He also introduces the Chinese practice of whisking powdered green tea ￼. Eisai’s efforts establish the Uji tea region and the roots of the Japanese tea ceremony.</p>
-</div>
+  <div class="event" data-year="1191">
+    <img src="img/event-1191.png" alt="Event image">
+    <h2>Eisai brings tea seeds</h2>
+    <p class="event-year">1191 AD</p>
+    <p>Zen monk Eisai returns from Song China with tea seeds and cultivates them in Kyushu and at Kōzan-ji temple in Kyoto (Tagano-o). He also introduces the Chinese practice of whisking powdered green tea. Eisai’s efforts establish the Uji tea region and the roots of the Japanese tea ceremony.</p>
+  </div>
 
-<div class="event" data-year="1211">
-  <h2>Kissa Yōjōki</h2>
-  <p class="event-year">1211 AD</p>
-  <p>Eisai publishes Kissa Yōjōki (“Drink Tea and Prolong Life”), Japan’s first tea treatise ￼. The book extols tea’s health benefits, describes how to grow and process tea, and spreads tea drinking as a medicinal practice. It helps popularize tea among samurai and aristocrats.</p>
-</div>
+  <div class="event" data-year="1211">
+    <img src="img/event-1211.png" alt="Event image">
+    <h2>Kissa Yōjōki</h2>
+    <p class="event-year">1211 AD</p>
+    <p>Eisai publishes Kissa Yōjōki (“Drink Tea and Prolong Life”), Japan’s first tea treatise. The book extols tea’s health benefits, describes how to grow and process tea, and spreads tea drinking as a medicinal practice. It helps popularize tea among samurai and aristocrats.</p>
+  </div>
 
-<div class="event" data-year="1350">
-  <h2>Tōcha contests</h2>
-  <p class="event-year">14th century</p>
-  <p>Competitive tea-tasting games (闘茶, tōcha) become a popular samurai pastime ￼. Participants wager on distinguishing regional teas (traditionally Uji “honcha” vs. other “hicha”) ￼. These lavish events with prizes and spectacle deepen tea connoisseurship and boost demand for high-quality Uji tea.</p>
-</div>
+  <div class="event" data-year="1350">
+    <img src="img/event-1350.png" alt="Event image">
+    <h2>Tōcha contests</h2>
+    <p class="event-year">14th century</p>
+    <p>Competitive tea-tasting games (闘茶, tōcha) become a popular samurai pastime. Participants wager on distinguishing regional teas (traditionally Uji “honcha” vs. other “hicha”). These lavish events with prizes and spectacle deepen tea connoisseurship and boost demand for high-quality Uji tea.</p>
+  </div>
 
-<div class="event" data-year="1397">
-  <h2>Uji Rokuen tea gardens</h2>
-  <p class="event-year">1397 AD</p>
-  <p>Shōgun Ashikaga Yoshimitsu founds the Golden Pavilion (Kinkaku-ji) and establishes the Six Tea Gardens of Uji (Uji Rokuen) to supply his tea ceremonies ￼. By creating official plantations in Uji, Yoshimitsu elevates Uji as Japan’s premier tea-growing region ￼. This state backing also leads to techniques like shading tea plants for finer flavor.</p>
-</div>
+  <div class="event" data-year="1397">
+    <img src="img/event-1397.png" alt="Event image">
+    <h2>Uji Rokuen tea gardens</h2>
+    <p class="event-year">1397 AD</p>
+    <p>Shōgun Ashikaga Yoshimitsu founds the Golden Pavilion (Kinkaku-ji) and establishes the Six Tea Gardens of Uji (Uji Rokuen) to supply his tea ceremonies. By creating official plantations in Uji, Yoshimitsu elevates Uji as Japan’s premier tea-growing region. This state backing also leads to techniques like shading tea plants for finer flavor.</p>
+  </div>
 
-<div class="event" data-year="1475">
-  <h2>Wabi-cha and Murata Shukō</h2>
-  <p class="event-year">15th century</p>
-  <p>Retired Shōgun Ashikaga Yoshimasa (r. 1368–94) builds the first formal shoin-style tea room at Ginkaku-ji ￼. His tea master Murata Shukō (1423–1502) pioneers the wabi-cha aesthetic ￼, favoring simple, rustic Japanese tea wares alongside some Chinese objects. Shukō’s emphasis on austere beauty and intimacy in small tea huts (6×6 feet) spreads Chanoyu beyond the elite to merchants.</p>
-</div>
+  <div class="event" data-year="1475">
+    <img src="img/event-1475.png" alt="Event image">
+    <h2>Wabi-cha and Murata Shukō</h2>
+    <p class="event-year">15th century</p>
+    <p>Retired Shōgun Ashikaga Yoshimasa (r. 1368–94) builds the first formal shoin-style tea room at Ginkaku-ji. His tea master Murata Shukō (Jukō) (1423–1502) pioneers the wabi-cha aesthetic, favoring simple, rustic Japanese tea wares alongside some Chinese objects. Shukō’s emphasis on austere beauty and intimacy in small tea huts (6×6 feet) spreads Chanoyu beyond the elite to merchants.</p>
+  </div>
 
-<div class="event" data-year="1585">
-  <h2>Sen no Rikyū’s chanoyu</h2>
-  <p class="event-year">1580s</p>
-  <p>Tea master Sen no Rikyū (1522–1591) becomes the tea advisor to warlords Oda Nobunaga and Toyotomi Hideyoshi. Rikyū codifies wabi-cha style: he designs the famed Taian tea house, simplifies tea utensils, and creates the nijiriguchi (crawl-in entrance) ￼. His understated, ritualized tea ceremony etiquette becomes the foundation of modern Japanese tea ceremony practice ￼.</p>
-</div>
+  <div class="event" data-year="1585">
+    <img src="img/event-1585.png" alt="Event image">
+    <h2>Sen no Rikyū’s chanoyu</h2>
+    <p class="event-year">1580s</p>
+    <p>Tea master Sen no Rikyū (1522–1591) becomes the tea advisor to warlords Oda Nobunaga and Toyotomi Hideyoshi. Rikyū codifies wabi-cha style: he designs the famed Taian tea house, simplifies tea utensils, and creates the nijiriguchi (crawl-in entrance). His understated, ritualized tea ceremony etiquette becomes the foundation of modern Japanese tea ceremony practice.</p>
+  </div>
 
-<div class="event" data-year="1738">
-  <h2>Sencha invented</h2>
-  <p class="event-year">1738 AD</p>
-  <p>Uji tea grower Nagatani Sōen develops a new sencha processing method (Ao-Seiho): he steams only the freshest leaves, hand-rolls and pan-dries them ￼. The result is a bright green, fragrant loose-leaf tea. Sōen’s innovation yields a higher-quality sencha that soon spreads nationwide ￼, making tea drinking common among townspeople (not just aristocrats).</p>
-</div>
+  <div class="event" data-year="1738">
+    <img src="img/event-1738.png" alt="Event image">
+    <h2>Sencha invented</h2>
+    <p class="event-year">1738 AD</p>
+    <p>Uji tea grower Nagatani Sōen develops a new sencha processing method (Ao-Seiho): he steams only the freshest leaves, hand-rolls and pan-dries them. The result is a bright green, fragrant loose-leaf tea. Sōen’s innovation yields a higher-quality sencha that soon spreads nationwide, making tea drinking common among townspeople (not just aristocrats).</p>
+  </div>
+  <div class="event" data-year="1835">
+    <img src="img/event-1835.png" alt="Event image">
+    <h2>Gyokuro created</h2>
+    <p class="event-year">1835 AD</p>
+    <p>Kahei Yamamoto (sixth generation) of Kyoto perfects shaded cultivation to produce Gyokuro. By covering tea plants for weeks before harvest, Gyokuro leaves develop extra sweetness and theanine. This high-grade, umami-rich green tea becomes renowned as a luxury product, further diversifying Japan’s tea styles.</p>
+  </div>
 
-<div class="event" data-year="1835">
-  <h2>Gyokuro created</h2>
-  <p class="event-year">1835 AD</p>
-  <p>Kahei Yamamoto (sixth generation) of Kyoto perfects shaded cultivation to produce Gyokuro ￼. By covering tea plants for weeks before harvest, Gyokuro leaves develop extra sweetness and theanine. This high-grade, umami-rich green tea becomes renowned as a luxury product, further diversifying Japan’s tea styles ￼.</p>
-</div>
+  <div class="event" data-year="1858">
+    <img src="img/event-1858.png" alt="Event image">
+    <h2>Tea exports begin</h2>
+    <p class="event-year">1858 AD</p>
+    <p>After Commodore Perry’s arrival (1853) Japan ends isolation. The Ansei Treaties (1858) open Japanese ports; tea is one of the first major export commodities. In a few decades Japan’s tea exports soar (at times exceeding 60% of production), integrating Japan into the global tea trade.</p>
+  </div>
 
-<div class="event" data-year="1858">
-  <h2>Tea exports begin</h2>
-  <p class="event-year">1858 AD</p>
-  <p>After Commodore Perry’s arrival (1853) Japan ends isolation. The Ansei Treaties (1858) open Japanese ports; tea is one of the first major export commodities ￼. In a few decades Japan’s tea exports soar (at times exceeding 60% of production), integrating Japan into the global tea trade ￼.</p>
-</div>
+  <div class="event" data-year="1890">
+    <img src="img/event-1890.png" alt="Event image">
+    <h2>Modernization</h2>
+    <p class="event-year">Late 1800s</p>
+    <p>In the Meiji era (late 19th – early 20th c.), Japan modernizes tea production. Innovators like Kenzo Takabayashi invent rolling and processing machines that dramatically speed production. Hikosaburo Sugiyama develops the Yabukita cultivar in the early 1900s, whose high yield and quality make it the country’s most widely planted tea variety to this day.</p>
+  </div>
 
-<div class="event" data-year="1890">
-  <h2>Modernization</h2>
-  <p class="event-year">Late 1800s</p>
-  <p>In the Meiji era (late 19th – early 20th c.), Japan modernizes tea production ￼. Innovators like Kenzo Takabayashi invent rolling and processing machines that dramatically speed production. Hikosaburo Sugiyama develops the Yabukita cultivar in the early 1900s ￼, whose high yield and quality make it the country’s most widely planted tea variety to this day.</p>
-</div>
+  <div class="event" data-year="1982">
+    <img src="img/event-1982.png" alt="Event image">
+    <h2>Canned tea</h2>
+    <p class="event-year">1979–1985</p>
+    <p>Tea producer Ito En launches Japan’s first canned tea beverages. In 1979 it releases canned oolong tea, and in 1985 it introduces a nitrogen-flushed canned sencha. These ready-to-drink teas preserve fresh flavor without refrigeration, sparking a convenience boom. Canned green teas (like Oi Ocha) become ubiquitous in vending machines and stores, transforming everyday tea consumption.</p>
+  </div>
 
-<div class="event" data-year="1982">
-  <h2>Canned tea</h2>
-  <p class="event-year">1979–1985</p>
-  <p>Tea producer Ito En launches Japan’s first canned tea beverages. In 1979 it releases canned oolong tea, and in 1985 it introduces a nitrogen-flushed canned sencha ￼. These ready-to-drink teas preserve fresh flavor without refrigeration, sparking a convenience boom. Canned green teas (like Oi Ocha) become ubiquitous in vending machines and stores, transforming everyday tea consumption.</p>
-</div>
+  <div class="event" data-year="1990">
+    <img src="img/event-1990.png" alt="Event image">
+    <h2>PET bottled green tea</h2>
+    <p class="event-year">1990</p>
+    <p>Ito En becomes the first company to market green tea in PET plastic bottles. Branded as Oi Ocha, these chilled bottled teas make green tea more accessible, leveraging modern packaging. This innovation creates a huge domestic market for bottled tea and eventually spreads to global exports.</p>
+  </div>
 
-<div class="event" data-year="1990">
-  <h2>PET bottled green tea</h2>
-  <p class="event-year">1990</p>
-  <p>Ito En becomes the first company to market green tea in PET plastic bottles ￼ ￼. Branded as Oi Ocha, these chilled bottled teas make green tea more accessible, leveraging modern packaging. This innovation creates a huge domestic market for bottled tea and eventually spreads to global exports.</p>
-</div>
+  <div class="event" data-year="1996">
+    <img src="img/event-1996.png" alt="Event image">
+    <h2>“Natural Clear” method</h2>
+    <p class="event-year">1996</p>
+    <p>To keep bottled green tea clear, Ito En patents its Natural Clear filtration (removing sediment called ori). By straining microscopic tea particles without harming flavor, they achieve crystal-clear bottled tea. This technological advance greatly improves the shelf appeal of PET green tea and is adopted industry-wide.</p>
+  </div>
 
-<div class="event" data-year="1996">
-  <h2>“Natural Clear” method</h2>
-  <p class="event-year">1996</p>
-  <p>To keep bottled green tea clear, Ito En patents its Natural Clear filtration (removing sediment called ori) ￼. By straining microscopic tea particles without harming flavor, they achieve crystal-clear bottled tea. This technological advance greatly improves the shelf appeal of PET green tea and is adopted industry-wide.</p>
-</div>
+  <div class="event" data-year="2000">
+    <img src="img/event-2000.png" alt="Event image">
+    <h2>Heatable PET bottles</h2>
+    <p class="event-year">2000</p>
+    <p>Ito En develops the first PET bottle that can safely hold hot tea. By using a special high-barrier plastic, oxygen permeability and heat damage are minimized. Launched in 2000, heatable PET tea bottles allow vending-machine hot tea, expanding tea consumption opportunities even in cold seasons.</p>
+  </div>
 
-<div class="event" data-year="2000">
-  <h2>Heatable PET bottles</h2>
-  <p class="event-year">2000</p>
-  <p>Ito En develops the first PET bottle that can safely hold hot tea ￼. By using a special high-barrier plastic, oxygen permeability and heat damage are minimized. Launched in 2000, heatable PET tea bottles allow vending-machine hot tea, expanding tea consumption opportunities even in cold seasons ￼.</p>
-</div>
+  <div class="event" data-year="2022">
+    <img src="img/event-2022.png" alt="Event image">
+    <h2>Modern market</h2>
+    <p class="event-year">2020s</p>
+    <p>In recent years Japan’s domestic green tea consumption has leveled off, while international demand grows. By 2022 Japan produced ~77,200 tons of tea and exported ~6,263 tons. Tea remains a cultural staple (with the traditional tea ceremony still practiced), but the industry now emphasizes efficiency, branding (like premium single-origin teas), and export growth.</p>
+  </div>
 
-<div class="event" data-year="2022">
-  <h2>Modern market</h2>
-  <p class="event-year">2020s</p>
-  <p>In recent years Japan’s domestic green tea consumption has leveled off, while international demand grows ￼. By 2022 Japan produced ~77,200 tons of tea and exported ~6,263 tons ￼. Tea remains a cultural staple (with the traditional tea ceremony still practiced), but the industry now emphasizes efficiency, branding (like premium single-origin teas), and export growth.</p>
-</div>
-  </section>
-  <div id="timeline-marker"></div>
-  <div id="timeline-image-wrapper">
-  <img id="timeline-image" src="img/timeline.png" alt="Timeline">
-</div>
-</div>
+</section>
+    <div id="timeline-marker"></div>
+    <div id="timeline-image-wrapper">
+      <img id="timeline-image" src="img/timeline.png" alt="Timeline">
+    </div>
+  </div>
 
   <script>
     const toc = document.getElementById('toc');
@@ -850,88 +1030,110 @@ You can either close the lid or leave it open to enjoy the dance of the tea leav
     // Chapter 3 - IntersectionObserver for year tracking
 
     // --- 年号表示を Chapter 3 のみ表示する ---
-const chapter3Content = document.getElementById('chapter3_content');
+    const chapter3Content = document.getElementById('chapter3_content');
 
 
-window.addEventListener('scroll', toggleTimelineVisibility);
-const historyEvents = document.querySelectorAll('#history-events .event');
+    window.addEventListener('scroll', toggleTimelineVisibility);
+    const historyEvents = document.querySelectorAll('#history-events .event');
 
 
 
 
-// Chapter 3 の表示位置を Chapter 2 の直後に配置する
-function positionChapter3() {
-  const chapter2 = document.getElementById('chapter2_content');
-  const chapter3 = document.getElementById('chapter3');
-  const chapter3Text = document.getElementById('chapter3_text');
-  const chapter3Content = document.getElementById('chapter3_content');
+    // Chapter 3 の表示位置を Chapter 2 の直後に配置する
+    function positionChapter3() {
+      const chapter2 = document.getElementById('chapter2_content');
+      const chapter3 = document.getElementById('chapter3');
+      const chapter3Text = document.getElementById('chapter3_text');
+      const chapter3Content = document.getElementById('chapter3_content');
 
-  const bottom2 = chapter2.offsetTop + chapter2.offsetHeight;
+      const bottom2 = chapter2.offsetTop + chapter2.offsetHeight;
 
-  chapter3.style.top = `${bottom2 + 200}px`;
-  chapter3Text.style.top = `${bottom2 + 600}px`;
-  chapter3Content.style.top = `${bottom2 + 1000}px`;
-}
+      chapter3.style.top = `${bottom2 + 200}px`;
+      chapter3Text.style.top = `${bottom2 + 700}px`;
+      chapter3Content.style.top = `${bottom2 + 1000}px`;
+    }
 
-window.addEventListener('load', positionChapter3);
-window.addEventListener('resize', positionChapter3);
-
-
-// === Chapter 3 タイムライン画像処理 ===
-const timelineWrapper = document.getElementById('timeline-image-wrapper');
-const timelineImage = document.getElementById('timeline-image');
+    window.addEventListener('load', positionChapter3);
+    window.addEventListener('resize', positionChapter3);
 
 
-window.addEventListener('load', toggleTimelineVisibility);
-// Chapter 3 が見えているかどうかで画像表示切替
+    // === Chapter 3 タイムライン画像処理 ===
+    const timelineWrapper = document.getElementById('timeline-image-wrapper');
+    const timelineImage = document.getElementById('timeline-image');
+
+
+    window.addEventListener('load', toggleTimelineVisibility);
+    // Chapter 3 が見えているかどうかで画像表示切替
+    let hasEnteredChapter3 = false;
+
+let chapter3WasInView = false;
+
 function toggleTimelineVisibility() {
   const rect = chapter3Content.getBoundingClientRect();
   const inView = rect.top < window.innerHeight && rect.bottom > 0;
-  timelineWrapper.style.display = inView ? 'block' : 'none';
-    document.getElementById('timeline-marker').style.display = inView ? 'block' : 'none';
-}
-window.addEventListener('scroll', toggleTimelineVisibility);
 
-// 800年 = 500px, 2000年 = 2500px → 1700年ぶんで2000px
-const yearToX = year => {
-  const pxPerYear = 2000 / (2000 - 800); // 2000px ÷ 1200年
-  return 1000 + (year - 800) * pxPerYear;
-};
-function centerTimelineOn(year) {
-  // 実際の年号に対応する実画像上のX座標
-  const rawX = 1000 + (year - 800) * (2000 / 1200); // 800〜2000年が2000px幅
+  if (inView) {
+    timelineWrapper.style.display = 'block';
+    document.getElementById('timeline-marker').style.display = 'block';
 
-  // 表示画像のスケール（例：表示3000px / 実4000px）
-  const scale = timelineImage.offsetWidth / 4000;
-
-  // 表示画像上での実際のX位置
-  const x = rawX * scale;
-
-  // スクロール範囲・中心調整
-  const containerWidth = timelineWrapper.offsetWidth;
-  const imgDisplayWidth = timelineImage.offsetWidth;
-  const maxOffset = imgDisplayWidth - containerWidth;
-  const targetX = x - containerWidth / 2;
-  const offsetX = Math.max(0, Math.min(targetX, maxOffset));
-
-  // スライド適用
-  timelineImage.style.transform = `translateX(${-offsetX}px)`;
-}
-
-// IntersectionObserver（更新）
-const updatedYearObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const year = entry.target.dataset.year;
-      centerTimelineOn(year);
+    if (!chapter3WasInView) {
+      // 初回 or 再入時に1番目のイベントへアニメーション移動
+      const firstEvent = document.querySelector('#history-events .event');
+      if (firstEvent) {
+         timelineImage.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+  centerTimelineOn(firstEvent.dataset.year);
+}, 100);
+      }
     }
-  });
-}, {
-  root: null,
-  rootMargin: '-20% 0px -80% 0px',
-  threshold: 0.0
-});
-historyEvents.forEach(event => updatedYearObserver.observe(event));
+  } else {
+    // 離脱時に左へスライドアウト
+    timelineImage.style.transform = 'translateX(-100%)';
+    timelineWrapper.style.display = 'none';
+    document.getElementById('timeline-marker').style.display = 'none';
+  }
+  chapter3WasInView = inView;
+}
+    window.addEventListener('scroll', toggleTimelineVisibility);
+
+    // 800年 = 500px, 2000年 = 2500px → 1700年ぶんで2000px
+    const yearToX = year => {
+  const pxPerYear = 2000 / (2000 - 800); // 2000px ÷ 1200年
+  return 2000 + (year - 800) * pxPerYear;
+};
+    function centerTimelineOn(year) {
+      // 実際の年号に対応する実画像上のX座標
+      const rawX = 2000 + (year - 800) * (2000 / 1200); // ← 左2000px開始、幅2000px
+  const scale = timelineImage.offsetWidth / 6000; // ← 実画像サイズに合わせて拡大率を計算
+
+      // 表示画像上での実際のX位置
+      const x = rawX * scale;
+
+      // スクロール範囲・中心調整
+      const containerWidth = timelineWrapper.offsetWidth;
+      const imgDisplayWidth = timelineImage.offsetWidth;
+      const maxOffset = imgDisplayWidth - containerWidth;
+      const targetX = x - containerWidth / 2;
+      const offsetX = Math.max(0, Math.min(targetX, maxOffset));
+
+      // スライド適用
+      timelineImage.style.transform = `translateX(${-offsetX}px)`;
+    }
+
+    // IntersectionObserver（更新）
+    const updatedYearObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const year = entry.target.dataset.year;
+          centerTimelineOn(year);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '-20% 0px -80% 0px',
+      threshold: 0.0
+    });
+    historyEvents.forEach(event => updatedYearObserver.observe(event));
   </script>
 
 </body>

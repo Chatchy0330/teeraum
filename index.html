@@ -930,17 +930,6 @@
     let latestScrollY = 0;
     let ticking = false;
 
-    window.addEventListener('scroll', () => {
-      // 1) 最新の scrollY を取得
-      latestScrollY = window.scrollY;
-      // 2) 画面右上に表示
-      scrollValue.textContent = `${latestScrollY}px`;
-      // 3) アニメーション更新
-      if (!ticking) {
-        requestAnimationFrame(update);
-        ticking = true;
-      }
-    }, { passive: true });
 
     function update() {
       // 目次パララックス効果：スクロール量の 0.5 倍だけ下へ
